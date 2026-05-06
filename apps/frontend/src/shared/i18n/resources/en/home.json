@@ -1,0 +1,30 @@
+{
+  "welcomeTitle": "Welcome",
+  "welcomeSubtitle": "Main dashboard of the application. Check the most relevant system data at a glance.",
+  "kpis": {
+    "users": {
+      "label": "Registered users"
+    },
+    "roles": {
+      "label": "Defined roles"
+    },
+    "loading": "—",
+    "error": "Not available"
+  },
+  "health": {
+    "title": "System status"
+  },
+  "quick": {
+    "title": "Quick access",
+    "users": {
+      "title": "Users",
+      "description": "Manage the accounts of people with access to the application.",
+      "action": "Go to Users"
+    },
+    "roles": {
+      "title": "Roles",
+      "description": "Define the permissions each profile has within the system.",
+      "action": "Go to Roles"
+    }
+  }
+}

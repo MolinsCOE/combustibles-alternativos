@@ -1,0 +1,13 @@
+{
+  "title": "Información",
+  "appName": "Molins Skeleton",
+  "identity": {
+    "title": "Identificación",
+    "versionLabel": "Versión",
+    "format": "{{appName}} — v{{version}}"
+  },
+  "purpose": {
+    "title": "Propósito",
+    "body": "Describe aquí el propósito de la aplicación. Puedes editar este texto directamente desde los archivos de idioma (es/about.json y en/about.json)."
+  }
+}

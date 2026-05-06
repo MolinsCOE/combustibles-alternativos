@@ -1,0 +1,390 @@
+{
+  "nav": {
+    "module": "Combustibles Alternativos",
+    "dashboard": "Dashboard",
+    "solicitud": "Solicitud",
+    "distribucion": "Distribución",
+    "confirmacion": "Confirmación",
+    "seguimiento": "Seguimiento",
+    "maestros": "Maestros"
+  },
+  "estados": {
+    "borrador": "Borrador",
+    "pendiente_distribucion": "Pendiente de distribución",
+    "en_distribucion": "En distribución",
+    "enviada": "Enviada",
+    "confirmada": "Confirmada",
+    "cerrada": "Cerrada"
+  },
+  "confirmacion_estado": {
+    "pendiente": "Pendiente",
+    "confirmada": "Confirmada",
+    "rechazada": "Rechazada"
+  },
+  "dias": {
+    "lunes": "L",
+    "martes": "M",
+    "miercoles": "X",
+    "jueves": "J",
+    "viernes": "V",
+    "sabado": "S",
+    "domingo": "D",
+    "lunes_full": "Lunes",
+    "martes_full": "Martes",
+    "miercoles_full": "Miércoles",
+    "jueves_full": "Jueves",
+    "viernes_full": "Viernes",
+    "sabado_full": "Sábado",
+    "domingo_full": "Domingo"
+  },
+  "dashboard": {
+    "title": "Dashboard — Combustibles Alternativos",
+    "subtitle": "Flujo para coordinar producción, compras y proveedores",
+    "semana": "Semana {{semana}} / {{anyo}}",
+    "kpis": {
+      "viajesHoy": "Viajes hoy",
+      "viajesPlanHoy": "Plan hoy",
+      "desviacion": "Desviación",
+      "pendientesEnvio": "Pendientes de envío",
+      "incidenciasActivas": "Incidencias activas",
+      "lineasPendientesConfirmacion": "Líneas pendientes de confirmación",
+      "cumplimiento": "% Cumplimiento semana"
+    },
+    "tablaSemana": {
+      "title": "Resumen de la semana activa",
+      "material": "Material",
+      "planificados": "Planificados",
+      "confirmados": "Confirmados",
+      "reales": "Reales",
+      "desviacion": "Desviación"
+    },
+    "accesosRapidos": {
+      "title": "Accesos rápidos",
+      "nuevaSolicitud": "Nueva solicitud",
+      "nuevaSolicitudDesc": "Crear o editar la solicitud de la semana",
+      "distribuir": "Distribuir viajes",
+      "distribuirDesc": "Asignar viajes a proveedores y transportistas",
+      "seguimiento": "Ver seguimiento",
+      "seguimientoDesc": "Cruce real vs planificado del día",
+      "maestros": "Maestros",
+      "maestrosDesc": "Gestionar materiales, proveedores y transportistas"
+    },
+    "sinPlanificacion": "No hay planificación activa para esta semana."
+  },
+  "solicitud": {
+    "title": "Solicitud Semanal de Producción",
+    "subtitle": "Introduce el número de viajes por material y día",
+    "nuevaSolicitud": "Nueva solicitud",
+    "semanaLabel": "Semana",
+    "comentarioGeneral": "Comentario general",
+    "comentarioGeneralPlaceholder": "Observaciones para Compras sobre esta semana (opcional)",
+    "comentarioLinea": "Nota",
+    "guardarBorrador": "Guardar borrador",
+    "enviarCompras": "Enviar a Compras",
+    "material": "Material",
+    "destino": "Destino",
+    "total": "Total",
+    "columns": {
+      "material": "Material",
+      "destino": "Destino",
+      "total": "Total",
+      "comentario": "Nota"
+    },
+    "estados": {
+      "label": "Estado"
+    },
+    "historial": {
+      "title": "Solicitudes anteriores",
+      "semana": "Semana",
+      "estado": "Estado",
+      "acciones": "Acciones"
+    },
+    "toast": {
+      "guardado": "Solicitud guardada como borrador",
+      "enviado": "Solicitud enviada a Compras"
+    },
+    "confirm": {
+      "enviar": "¿Enviar la solicitud a Compras? Una vez enviada, no podrás editarla mientras Compras esté distribuyendo.",
+      "enviarTitle": "Confirmar envío"
+    }
+  },
+  "distribucion": {
+    "title": "Distribución de Compras",
+    "subtitle": "Asigna viajes a proveedores y transportistas para la semana",
+    "solicitudRecibida": "Solicitud de Producción",
+    "totalSemanal": "Total semanal (Compras)",
+    "sugerenciaReparto": "Sugerencia de reparto",
+    "enviarCorreos": "Enviar correos",
+    "enviarTodos": "Enviar todos",
+    "reenviarLinea": "Reenviar",
+    "columns": {
+      "material": "Material",
+      "proveedor": "Proveedor",
+      "transportista": "Transportista",
+      "destino": "Destino",
+      "total": "Total",
+      "correoEnviado": "Correo",
+      "confirmacion": "Confirmación"
+    },
+    "badgeEnviado": "Enviado",
+    "badgePendiente": "Pendiente",
+    "aviso": {
+      "decimales": "El cálculo por porcentaje produce decimales. Ajusta manualmente para cuadrar la suma.",
+      "sumaDiferente": "La suma de días ({{suma}}) no coincide con el total asignado ({{total}})."
+    },
+    "toast": {
+      "correosEnviados": "Correos enviados correctamente",
+      "guardado": "Distribución guardada"
+    }
+  },
+  "confirmacion": {
+    "title": "Confirmación de planificación",
+    "subtitle": "Revisa y confirma los viajes asignados a tu empresa",
+    "confirmarTodo": "Confirmar todo",
+    "columns": {
+      "material": "Material",
+      "destino": "Destino",
+      "restriccion": "Horario",
+      "total": "Total",
+      "estado": "Estado",
+      "acciones": "Acciones"
+    },
+    "confirmar": "Confirmar",
+    "rechazar": "Rechazar",
+    "motivoRechazo": "Motivo de rechazo",
+    "motivoRechazoPlaceholder": "Explica el motivo del rechazo (obligatorio)",
+    "motivoObligatorio": "El motivo es obligatorio para rechazar",
+    "modalRechazoTitle": "Rechazar línea",
+    "toast": {
+      "confirmada": "Línea confirmada",
+      "rechazada": "Línea rechazada",
+      "todoConfirmado": "Toda la planificación confirmada"
+    },
+    "sinLineas": "No tienes líneas pendientes de confirmación.",
+    "semana": "Semana {{semana}} / {{anyo}}"
+  },
+  "seguimiento": {
+    "title": "Seguimiento — Cruce real vs planificado",
+    "subtitle": "Compara los viajes confirmados con los realmente recibidos",
+    "diaLabel": "Día",
+    "registrarViajes": "Registrar viajes reales",
+    "columns": {
+      "material": "Material",
+      "proveedor": "Proveedor",
+      "transportista": "Transportista",
+      "planificado": "Planificado",
+      "confirmado": "Confirmado",
+      "real": "Real",
+      "desviacion": "Desviación",
+      "estado": "Estado",
+      "motivo": "Motivo"
+    },
+    "estados": {
+      "ok": "OK",
+      "incidencia": "Incidencia",
+      "aviso": "Aviso"
+    },
+    "formulario": {
+      "title": "Registrar viajes reales del día",
+      "material": "Material",
+      "proveedor": "Proveedor",
+      "transportista": "Transportista",
+      "viajes": "Núm. viajes",
+      "guardar": "Guardar",
+      "cancelar": "Cancelar"
+    },
+    "incidencias": {
+      "title": "Incidencias del período",
+      "comentario": "Comentario interno",
+      "comentarioPlaceholder": "Añade una nota sobre esta incidencia (opcional)"
+    },
+    "toast": {
+      "guardado": "Viajes reales registrados"
+    },
+    "importar": {
+      "boton": "Importar fichero Prosegur",
+      "title": "Importar viajes reales — Fichero Prosegur",
+      "cerrar": "Cerrar",
+      "avisoFormato": "El fichero debe estar en formato CSV (exportado desde Excel). Las columnas deben seguir el orden del fichero diario de Prosegur.",
+      "ficheroLabel": "Selecciona el fichero CSV de Prosegur",
+      "seleccionarFichero": "Elegir fichero",
+      "cargando": "Leyendo el fichero…",
+      "errorLectura": "No se pudo leer el fichero. Comprueba que es un CSV válido.",
+      "sinFilas": "El fichero no contiene filas con datos válidos.",
+      "filasMapeadas": "{{n}} fila(s) reconocidas correctamente",
+      "filasNoMapeadas": "{{n}} fila(s) no reconocidas (revisar manualmente)",
+      "filasOmitidas": "{{n}} fila(s) omitidas por formato incorrecto",
+      "textoOriginal": "Texto original no reconocido",
+      "noReconocido": "No reconocido",
+      "revisar": "Revisar",
+      "ok": "OK",
+      "cancelar": "Cancelar",
+      "confirmar": "Confirmar importación",
+      "col": {
+        "fecha": "Fecha",
+        "materialDetectado": "Material detectado",
+        "proveedor": "Proveedor",
+        "transportista": "Transportista",
+        "horaEntrada": "Hora entrada",
+        "horaSalida": "Hora salida",
+        "destino": "Destino",
+        "estado": "Estado"
+      },
+      "toast": {
+        "importadoOk": "Fichero importado. Cruce actualizado.",
+        "importadoConAvisos": "Fichero importado. {{n}} fila(s) no reconocidas requieren revisión manual."
+      }
+    }
+  },
+  "maestros": {
+    "title": "Maestros — Combustibles Alternativos",
+    "subtitle": "Gestiona los catálogos de configuración del módulo",
+    "tabs": {
+      "materiales": "Materiales",
+      "destinos": "Destinos",
+      "proveedores": "Proveedores",
+      "transportistas": "Transportistas",
+      "asignaciones": "Asignaciones"
+    },
+    "materiales": {
+      "title": "Materiales",
+      "crear": "Nuevo material",
+      "columns": {
+        "nombre": "Nombre",
+        "destino": "Destino por defecto",
+        "restriccion": "Restricción horaria",
+        "activo": "Activo",
+        "acciones": "Acciones"
+      },
+      "form": {
+        "title_create": "Nuevo material",
+        "title_edit": "Editar material",
+        "nombre": "Nombre",
+        "destino": "Destino por defecto",
+        "restriccionInicio": "Hora inicio restricción",
+        "restriccionFin": "Hora fin restricción",
+        "activo": "Activo",
+        "errors": {
+          "nombreRequerido": "El nombre es obligatorio",
+          "destinoRequerido": "El destino es obligatorio",
+          "finSiInicio": "Si hay hora de inicio, la hora de fin también es obligatoria",
+          "inicioSiFin": "Si hay hora de fin, la hora de inicio también es obligatoria"
+        }
+      },
+      "sinRestriccion": "Sin restricción",
+      "toast": {
+        "creado": "Material creado",
+        "editado": "Material actualizado",
+        "desactivado": "Material desactivado"
+      }
+    },
+    "destinos": {
+      "title": "Destinos",
+      "crear": "Nuevo destino",
+      "columns": {
+        "nombre": "Nombre",
+        "activo": "Activo",
+        "acciones": "Acciones"
+      },
+      "form": {
+        "title_create": "Nuevo destino",
+        "title_edit": "Editar destino",
+        "nombre": "Nombre",
+        "activo": "Activo",
+        "errors": {
+          "nombreRequerido": "El nombre es obligatorio"
+        }
+      },
+      "toast": {
+        "creado": "Destino creado",
+        "editado": "Destino actualizado"
+      }
+    },
+    "proveedores": {
+      "title": "Proveedores",
+      "crear": "Nuevo proveedor",
+      "columns": {
+        "nombre": "Nombre",
+        "email": "Correo",
+        "activo": "Activo",
+        "acciones": "Acciones"
+      },
+      "form": {
+        "title_create": "Nuevo proveedor",
+        "title_edit": "Editar proveedor",
+        "nombre": "Nombre",
+        "email": "Correo de contacto",
+        "activo": "Activo",
+        "errors": {
+          "nombreRequerido": "El nombre es obligatorio",
+          "emailRequerido": "El correo es obligatorio",
+          "emailInvalido": "El correo no tiene un formato válido"
+        }
+      },
+      "toast": {
+        "creado": "Proveedor creado",
+        "editado": "Proveedor actualizado"
+      }
+    },
+    "transportistas": {
+      "title": "Transportistas",
+      "crear": "Nuevo transportista",
+      "columns": {
+        "nombre": "Nombre",
+        "correos": "Correos",
+        "activo": "Activo",
+        "acciones": "Acciones"
+      },
+      "form": {
+        "title_create": "Nuevo transportista",
+        "title_edit": "Editar transportista",
+        "nombre": "Nombre",
+        "emails": "Correos de contacto",
+        "addEmail": "Añadir correo",
+        "activo": "Activo",
+        "errors": {
+          "nombreRequerido": "El nombre es obligatorio",
+          "emailRequerido": "Se requiere al menos un correo",
+          "emailInvalido": "Correo {{index}} no tiene un formato válido"
+        }
+      },
+      "toast": {
+        "creado": "Transportista creado",
+        "editado": "Transportista actualizado"
+      }
+    },
+    "asignaciones": {
+      "title": "Asignaciones proveedor–transportista",
+      "crear": "Nueva asignación",
+      "columns": {
+        "material": "Material",
+        "proveedor": "Proveedor",
+        "transportista": "Transportista",
+        "porcentaje": "% viajes",
+        "acciones": "Acciones"
+      },
+      "form": {
+        "title_create": "Nueva asignación",
+        "title_edit": "Editar asignación",
+        "material": "Material",
+        "proveedor": "Proveedor",
+        "transportista": "Transportista",
+        "porcentaje": "Porcentaje de viajes",
+        "errors": {
+          "materialRequerido": "El material es obligatorio",
+          "proveedorRequerido": "El proveedor es obligatorio",
+          "transportistaRequerido": "El transportista es obligatorio",
+          "porcentajeRequerido": "El porcentaje es obligatorio",
+          "porcentajeRango": "El porcentaje debe estar entre 1 y 100",
+          "suma100": "La suma de porcentajes para este material y proveedor debe ser exactamente 100%"
+        }
+      },
+      "advertencia100": "Suma actual: {{suma}}% (debe ser 100%)",
+      "toast": {
+        "creado": "Asignación creada",
+        "editado": "Asignación actualizada",
+        "eliminado": "Asignación eliminada"
+      }
+    }
+  }
+}

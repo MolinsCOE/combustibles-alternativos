@@ -1,0 +1,30 @@
+{
+  "welcomeTitle": "Bienvenido",
+  "welcomeSubtitle": "Panel principal de la aplicación. Consulta de un vistazo los datos más relevantes del sistema.",
+  "kpis": {
+    "users": {
+      "label": "Usuarios registrados"
+    },
+    "roles": {
+      "label": "Roles definidos"
+    },
+    "loading": "—",
+    "error": "No disponible"
+  },
+  "health": {
+    "title": "Estado del sistema"
+  },
+  "quick": {
+    "title": "Accesos rápidos",
+    "users": {
+      "title": "Usuarios",
+      "description": "Gestiona las cuentas de personas con acceso a la aplicación.",
+      "action": "Ir a Usuarios"
+    },
+    "roles": {
+      "title": "Roles",
+      "description": "Define qué permisos tiene cada perfil dentro del sistema.",
+      "action": "Ir a Roles"
+    }
+  }
+}

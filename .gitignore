@@ -1,0 +1,10 @@
+node_modules/
+apps/*/dist/
+apps/*/coverage/
+apps/frontend/.vite/
+.env
+.env.test
+.DS_Store
+playwright-report/
+test-results/
+.playwright/

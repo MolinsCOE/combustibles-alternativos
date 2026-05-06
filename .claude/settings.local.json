@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm *)",
+      "Bash(pnpm *)",
+      "Bash(docker *)",
+      "Bash(node *)",
+      "Bash(npx *)",
+      "Bash(playwright *)",
+      "Bash(tsc *)",
+      "Bash(tsx *)",
+      "Bash(drizzle-kit *)",
+      "Bash(git *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(curl *)",
+      "Bash(whoami)",
+      "Bash(cmd.exe /c \"pnpm --version 2>&1 & echo EXIT_CODE:%ERRORLEVEL%\")",
+      "Bash(powershell -Command 'Get-Process | Where-Object { $_.Name -like '\\\\''*docker*'\\\\'' -or $_.Name -like '\\\\''*Docker*'\\\\'' } | Select-Object Name, Id, CPU')"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "postgres",
+    "figma"
+  ]
+}

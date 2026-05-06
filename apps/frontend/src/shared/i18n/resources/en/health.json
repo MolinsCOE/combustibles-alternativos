@@ -1,0 +1,8 @@
+{
+  "label": "System status",
+  "loading": "Checking…",
+  "status": {
+    "ok": "Operational",
+    "error": "Incidents detected"
+  }
+}

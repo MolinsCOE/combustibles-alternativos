@@ -1,0 +1,58 @@
+{
+  "app": {
+    "name": "Molins",
+    "title": "Molins · Administration",
+    "loading": "Loading...",
+    "error": "An error has occurred"
+  },
+  "language": {
+    "label": "Language",
+    "switcherAria": "Change language",
+    "es": "Spanish",
+    "en": "English",
+    "codes": {
+      "es": "ES",
+      "en": "EN"
+    }
+  },
+  "actions": {
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View",
+    "save": "Save changes",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "close": "Close",
+    "retry": "Retry",
+    "saving": "Saving…",
+    "deleting": "Deleting…"
+  },
+  "state": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "empty": "No content"
+  },
+  "pagination": {
+    "showing": "Showing {{from}}–{{to}} of {{total}}",
+    "page": "Page {{current}} of {{total}}",
+    "previous": "← Previous",
+    "next": "Next →"
+  },
+  "nav": {
+    "aria": "Main navigation",
+    "primaryAria": "Primary menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "home": "Home",
+    "administration": "Administration",
+    "users": "Users",
+    "roles": "Roles",
+    "information": "Information",
+    "expandSection": "Expand {{section}}",
+    "collapseSection": "Collapse {{section}}"
+  },
+  "demoBanner": {
+    "message": "This is a preview demo. The data you see is sample data and forms do not save real information yet."
+  }
+}

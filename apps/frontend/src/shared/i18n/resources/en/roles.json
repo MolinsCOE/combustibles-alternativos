@@ -1,0 +1,66 @@
+{
+  "list": {
+    "title": "Roles",
+    "subtitle": "Manage the system roles. Each user belongs to one role.",
+    "createButton": "+ Create role",
+    "paginationAria": "Roles pagination",
+    "columns": {
+      "nombre": "Name",
+      "descripcion": "Description",
+      "usuarios": "Users",
+      "acciones": "Actions"
+    },
+    "loading": "Loading roles…",
+    "emptyFirst": "There are no roles yet. Create the first one to get started.",
+    "emptyDescription": "—"
+  },
+  "detail": {
+    "back": "← Back to roles",
+    "loading": "Loading role…",
+    "editButton": "Edit role",
+    "noDescription": "No description.",
+    "usersSection": "Users with this role",
+    "usersEmpty": "This role has no users assigned yet. You can delete it if you no longer need it.",
+    "columns": {
+      "nombre": "Name",
+      "email": "Email",
+      "estado": "Status"
+    }
+  },
+  "nav": {
+    "aria": "Navigation"
+  },
+  "form": {
+    "createTitle": "Create role",
+    "editTitle": "Edit role",
+    "submit": {
+      "create": "Create role",
+      "edit": "Save changes"
+    },
+    "fields": {
+      "nombre": {
+        "label": "Name"
+      },
+      "descripcion": {
+        "label": "Description"
+      }
+    },
+    "errors": {
+      "nombreMin": "Name must be at least 2 characters long.",
+      "nombreMax": "Name cannot exceed 60 characters.",
+      "descripcionMax": "Description cannot exceed 240 characters."
+    }
+  },
+  "toast": {
+    "created": "Role \"{{nombre}}\" created.",
+    "updated": "Role \"{{nombre}}\" updated.",
+    "deleted": "Role \"{{nombre}}\" deleted."
+  },
+  "delete": {
+    "title": "Delete role",
+    "confirm": "Are you sure you want to delete the role \"{{nombre}}\"? This action cannot be undone.",
+    "blockedOne": "Role \"{{nombre}}\" cannot be deleted because it has {{count}} user assigned. Reassign or remove that user first.",
+    "blockedOther": "Role \"{{nombre}}\" cannot be deleted because it has {{count}} users assigned. Reassign or remove those users first.",
+    "error": "The role could not be deleted. Please try again."
+  }
+}

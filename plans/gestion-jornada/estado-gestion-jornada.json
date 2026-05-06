@@ -1,0 +1,162 @@
+{
+  "modulo": "gestion-jornada",
+  "ramaFeature": null,
+  "baseRama": "develop",
+  "tareas": [
+    {
+      "id": "T1.1",
+      "titulo": "Crear y gestionar proyectos",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T1.2",
+      "titulo": "Registrar una tarea diaria",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T1.3",
+      "titulo": "Anadir subtareas a una tarea",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T1.4",
+      "titulo": "Editar y cerrar tareas",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T1.5",
+      "titulo": "Vista de trabajo diaria y semanal",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T2.1",
+      "titulo": "Adjuntar ficheros a una tarea",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T2.2",
+      "titulo": "Visualizar adjuntos dentro de la app",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T2.3",
+      "titulo": "Eliminar adjuntos de una tarea",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T2.4",
+      "titulo": "Notificacion de fecha limite dentro de la app",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T2.5",
+      "titulo": "Notificacion de fecha limite por correo electronico",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T3.1",
+      "titulo": "Recopilacion automatica de tareas de la semana",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T3.2",
+      "titulo": "Generacion del borrador con las 8 secciones",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T3.3",
+      "titulo": "Pantalla de revision y edicion del borrador",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T3.4",
+      "titulo": "Descarga o copia del borrador para envio manual",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T4.1",
+      "titulo": "Historial de Weekly Snapshots generados",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T4.2",
+      "titulo": "Configuracion de preferencias del usuario",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T4.3",
+      "titulo": "Base de datos historica lista para KPIs",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    }
+  ],
+  "puntosGuardado": [],
+  "lineasDerivadas": []
+}

@@ -1,0 +1,58 @@
+{
+  "app": {
+    "name": "Molins",
+    "title": "Molins · Administración",
+    "loading": "Cargando...",
+    "error": "Ha ocurrido un error"
+  },
+  "language": {
+    "label": "Idioma",
+    "switcherAria": "Cambiar idioma",
+    "es": "Español",
+    "en": "Inglés",
+    "codes": {
+      "es": "ES",
+      "en": "EN"
+    }
+  },
+  "actions": {
+    "create": "Crear",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "view": "Ver",
+    "save": "Guardar cambios",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "close": "Cerrar",
+    "retry": "Reintentar",
+    "saving": "Guardando…",
+    "deleting": "Eliminando…"
+  },
+  "state": {
+    "active": "Activo",
+    "inactive": "Inactivo",
+    "empty": "Sin contenido"
+  },
+  "pagination": {
+    "showing": "Mostrando {{from}}–{{to}} de {{total}}",
+    "page": "Página {{current}} de {{total}}",
+    "previous": "← Anterior",
+    "next": "Siguiente →"
+  },
+  "nav": {
+    "aria": "Navegación principal",
+    "primaryAria": "Menú principal",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "home": "Inicio",
+    "administration": "Administración",
+    "users": "Usuarios",
+    "roles": "Roles",
+    "information": "Información",
+    "expandSection": "Expandir {{section}}",
+    "collapseSection": "Contraer {{section}}"
+  },
+  "demoBanner": {
+    "message": "Esta es una vista previa de demostración. Los datos que ves son de ejemplo y los formularios aún no guardan información real."
+  }
+}

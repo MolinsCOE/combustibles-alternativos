@@ -1,0 +1,216 @@
+{
+  "modulo": "combustibles-alternativos",
+  "ramaFeature": null,
+  "baseRama": "develop",
+  "tareas": [
+    {
+      "id": "T1.1",
+      "titulo": "Gestión de materiales",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T1.2",
+      "titulo": "Gestión de proveedores",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T1.3",
+      "titulo": "Gestión de transportistas",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T1.4",
+      "titulo": "Gestión de destinos",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T1.5",
+      "titulo": "Asignación proveedor–transportista–porcentaje por material",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T1.6",
+      "titulo": "Carga inicial de maestros",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T2.1",
+      "titulo": "Formulario de nueva solicitud semanal",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T2.2",
+      "titulo": "Guardado en borrador",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T2.3",
+      "titulo": "Envío de la solicitud a Compres",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T2.4",
+      "titulo": "Listado de solicitudes",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T3.1",
+      "titulo": "Vista de solicitud pendiente con distribución propuesta",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T3.2",
+      "titulo": "Distribución manual por días",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T3.3",
+      "titulo": "Generación de correos por empresa destino",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T3.4",
+      "titulo": "Envío de comunicaciones",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T4.1",
+      "titulo": "Vista de planificación del proveedor/transportista",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T4.2",
+      "titulo": "Confirmación o rechazo por línea",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T4.3",
+      "titulo": "Confirmación global",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T4.4",
+      "titulo": "Visibilidad de confirmaciones para Compres",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T4.5",
+      "titulo": "Redistribución ante rechazos",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T5.1",
+      "titulo": "Registro manual de viajes reales",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T5.2",
+      "titulo": "Cruce automático planificado vs real",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T5.3",
+      "titulo": "Registro de incidencias",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    },
+    {
+      "id": "T5.4",
+      "titulo": "Dashboard de la semana",
+      "estado": "pendiente",
+      "inicio": null,
+      "fin": null,
+      "commit": null,
+      "validadaPorUsuario": false
+    }
+  ],
+  "puntosGuardado": [],
+  "lineasDerivadas": []
+}

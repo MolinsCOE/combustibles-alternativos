@@ -1,0 +1,1089 @@
+{
+  "_meta": {
+    "source": "Molins · Library (Molins · UI Kit)",
+    "figmaFileUrl": "https://www.figma.com/design/rvo1AtV0m41GbQN1JPi8V8/Molins-%C2%B7-Library",
+    "figmaFileKey": "rvo1AtV0m41GbQN1JPi8V8",
+    "description": "Design tokens normalizados desde el export W3C (plugin Design Tokens de Lukas Oppermann).",
+    "lastSyncedAt": "2026-04-16T17:20:12.986Z",
+    "syncMethod": "figma_plugin_design_tokens_w3c",
+    "status": "synced",
+    "rawFile": "molins-ui-kit.w3c.tokens.json",
+    "builtBy": "build-normalized.mjs"
+  },
+  "colors": {
+    "primary": {
+      "green": {
+        "100": "#e3fcfa",
+        "300": "#3eb2a9",
+        "400": "#116c65",
+        "500": "#003e39",
+        "700": "#00322d",
+        "900": "#002522"
+      },
+      "sky": {
+        "100": "#e3f3fc",
+        "300": "#a7ddfc",
+        "500": "#22abf8",
+        "700": "#146795",
+        "900": "#0a334a"
+      }
+    },
+    "secondary": {
+      "land": {
+        "100": "#e0faf8",
+        "300": "#3eb2a9",
+        "500": "#04cbc0",
+        "700": "#15655e",
+        "900": "#012926"
+      },
+      "sun": {
+        "100": "#fff9ee",
+        "300": "#ffe8bc",
+        "500": "#ffc657",
+        "700": "#ab8334",
+        "900": "#433009"
+      },
+      "earth": {
+        "100": "#fcf5f1",
+        "300": "#f5d6c8",
+        "500": "#e69976",
+        "700": "#9c634a",
+        "900": "#3f2013"
+      }
+    },
+    "feedback": {
+      "success": {
+        "100": "#e3fced",
+        "500": "#00b847",
+        "900": "#005721"
+      },
+      "error": {
+        "100": "#fde4e4",
+        "500": "#d3322f",
+        "900": "#5f2120"
+      },
+      "warning": {
+        "100": "#fceee3",
+        "500": "#ef6c00",
+        "900": "#663c00"
+      }
+    },
+    "neutrals": {
+      "0": "#ffffff",
+      "100": "#f6f7f7",
+      "150": "#e5e6e6",
+      "200": "#d4d9d8",
+      "250": "#c7cdcc",
+      "300": "#adb2b2",
+      "400": "#949999",
+      "500": "#7a807f",
+      "600": "#616666",
+      "700": "#494d4c",
+      "800": "#323434",
+      "900": "#171a19",
+      "1000": "#000000"
+    },
+    "semantic": {
+      "bg": {
+        "surface.primary": {
+          "value": "#f6f7f7",
+          "alias": "colors.neutrals.100",
+          "description": null
+        },
+        "surface.secondary": {
+          "value": "#e5e6e6",
+          "alias": "colors.neutrals.150",
+          "description": null
+        },
+        "surface.tertiary": {
+          "value": "#d4d9d8",
+          "alias": "colors.neutrals.200",
+          "description": null
+        },
+        "surface.disable": {
+          "value": "#949999",
+          "alias": "colors.neutrals.400",
+          "description": null
+        },
+        "surface.invert": {
+          "value": "#171a19",
+          "alias": "colors.neutrals.900",
+          "description": null
+        },
+        "surface.white 0": {
+          "value": "#ffffff",
+          "alias": "colors.neutrals.0",
+          "description": null
+        },
+        "fill.primary": {
+          "value": "#003e39",
+          "alias": "colors.primary.green.500",
+          "description": null
+        },
+        "fill.secondary": {
+          "value": "#3eb2a9",
+          "alias": "colors.primary.green.300",
+          "description": null
+        },
+        "fill.accent": {
+          "value": "#22abf8",
+          "alias": "colors.primary.sky.500",
+          "description": null
+        },
+        "fill.disable": {
+          "value": "#949999",
+          "alias": "colors.neutrals.400",
+          "description": null
+        },
+        "fill.invert": {
+          "value": "#171a19",
+          "alias": "colors.neutrals.900",
+          "description": null
+        },
+        "fill.primary-hover": {
+          "value": "#00322d",
+          "alias": "colors.primary.green.700",
+          "description": null
+        },
+        "fill.secondary-hover": {
+          "value": "#003e39",
+          "alias": "colors.primary.green.500",
+          "description": null
+        },
+        "fill.accent-hover": {
+          "value": "#146795",
+          "alias": "colors.primary.sky.700",
+          "description": null
+        },
+        "fill.white 0": {
+          "value": "#ffffff",
+          "alias": "colors.neutrals.0",
+          "description": null
+        },
+        "fill.accent-pressed": {
+          "value": "#0a334a",
+          "alias": "colors.primary.sky.900",
+          "description": null
+        },
+        "fill.primary-pressed": {
+          "value": "#002522",
+          "alias": "colors.primary.green.900",
+          "description": null
+        },
+        "fill.accent-light": {
+          "value": "#e3f3fc",
+          "alias": "colors.primary.sky.100",
+          "description": null
+        },
+        "fill.primary-light": {
+          "value": "#e3fcfa",
+          "alias": "colors.primary.green.100",
+          "description": null
+        },
+        "fill.primary-accent": {
+          "value": "#116c65",
+          "alias": "colors.primary.green.400",
+          "description": null
+        },
+        "success.primary": {
+          "value": "#00b847",
+          "alias": "colors.feedback.success.500",
+          "description": null
+        },
+        "success.secondary": {
+          "value": "#005721",
+          "alias": "colors.feedback.success.900",
+          "description": null
+        },
+        "success.disable": {
+          "value": "#e3fced",
+          "alias": "colors.feedback.success.100",
+          "description": null
+        },
+        "error.primary": {
+          "value": "#d3322f",
+          "alias": "colors.feedback.error.500",
+          "description": null
+        },
+        "error.secondary": {
+          "value": "#5f2120",
+          "alias": "colors.feedback.error.900",
+          "description": null
+        },
+        "error.disable": {
+          "value": "#fde4e4",
+          "alias": "colors.feedback.error.100",
+          "description": null
+        },
+        "warning.primary": {
+          "value": "#ef6c00",
+          "alias": "colors.feedback.warning.500",
+          "description": null
+        },
+        "warning.secondary": {
+          "value": "#663c00",
+          "alias": "colors.feedback.warning.900",
+          "description": null
+        },
+        "warning.disable": {
+          "value": "#fceee3",
+          "alias": "colors.feedback.warning.100",
+          "description": null
+        },
+        "info.primary": {
+          "value": "#3eb2a9",
+          "alias": "colors.primary.green.300",
+          "description": null
+        },
+        "info.secondary": {
+          "value": "#00322d",
+          "alias": "colors.primary.green.700",
+          "description": null
+        },
+        "info.disable": {
+          "value": "#e3fcfa",
+          "alias": "colors.primary.green.100",
+          "description": null
+        }
+      },
+      "text": {
+        "primary-neutral 900": {
+          "value": "#171a19",
+          "alias": "colors.neutrals.900",
+          "description": null
+        },
+        "primary-hover": {
+          "value": "#494d4c",
+          "alias": "colors.neutrals.700",
+          "description": null
+        },
+        "secondary-hover": {
+          "value": "#171a19",
+          "alias": "colors.neutrals.900",
+          "description": null
+        },
+        "secondary": {
+          "value": "#494d4c",
+          "alias": "colors.neutrals.700",
+          "description": null
+        },
+        "error": {
+          "value": "#d3322f",
+          "alias": "colors.feedback.error.500",
+          "description": null
+        },
+        "success": {
+          "value": "#00b847",
+          "alias": "semantic tokens.bg.success.primary",
+          "description": null
+        },
+        "primary-molins-hover": {
+          "value": "#00322d",
+          "alias": "colors.primary.green.700",
+          "description": null
+        },
+        "primary-molins": {
+          "value": "#003e39",
+          "alias": "colors.primary.green.500",
+          "description": null
+        },
+        "warning": {
+          "value": "#ef6c00",
+          "alias": "colors.feedback.warning.500",
+          "description": null
+        },
+        "disabled": {
+          "value": "#adb2b2",
+          "alias": "colors.neutrals.300",
+          "description": null
+        },
+        "primary-neutral-invert 0": {
+          "value": "#ffffff",
+          "alias": "colors.neutrals.0",
+          "description": null
+        },
+        "accent": {
+          "value": "#22abf8",
+          "alias": "colors.primary.sky.500",
+          "description": null
+        },
+        "accent-hover": {
+          "value": "#146795",
+          "alias": "colors.primary.sky.700",
+          "description": null
+        },
+        "accent-pressed": {
+          "value": "#0a334a",
+          "alias": "colors.primary.sky.900",
+          "description": null
+        },
+        "terciary": {
+          "value": "#7a807f",
+          "alias": "colors.neutrals.500",
+          "description": null
+        },
+        "primary-neutral-invert 150": {
+          "value": "#e5e6e6",
+          "alias": "colors.neutrals.150",
+          "description": null
+        },
+        "primary-molins-accent": {
+          "value": "#116c65",
+          "alias": "colors.primary.green.400",
+          "description": null
+        }
+      },
+      "border": {
+        "primary": {
+          "value": "#003e39",
+          "alias": "colors.primary.green.500",
+          "description": null
+        },
+        "secondary": {
+          "value": "#22abf8",
+          "alias": "colors.primary.sky.500",
+          "description": null
+        },
+        "neutral 500": {
+          "value": "#7a807f",
+          "alias": "colors.neutrals.500",
+          "description": null
+        },
+        "success": {
+          "value": "#00b847",
+          "alias": "colors.feedback.success.500",
+          "description": null
+        },
+        "error": {
+          "value": "#d3322f",
+          "alias": "colors.feedback.error.500",
+          "description": null
+        },
+        "disable": {
+          "value": "#949999",
+          "alias": "colors.neutrals.400",
+          "description": null
+        },
+        "warning": {
+          "value": "#ef6c00",
+          "alias": "colors.feedback.warning.500",
+          "description": null
+        },
+        "invert": {
+          "value": "#171a19",
+          "alias": "colors.neutrals.900",
+          "description": null
+        },
+        "info": {
+          "value": "#3eb2a9",
+          "alias": "colors.primary.green.300",
+          "description": null
+        },
+        "error-hover": {
+          "value": "#5f2120",
+          "alias": "colors.feedback.error.900",
+          "description": null
+        },
+        "warning-hover": {
+          "value": "#663c00",
+          "alias": "colors.feedback.warning.900",
+          "description": null
+        },
+        "info-hover": {
+          "value": "#003e39",
+          "alias": "colors.primary.green.500",
+          "description": null
+        },
+        "primary-hover": {
+          "value": "#00322d",
+          "alias": "colors.primary.green.700",
+          "description": null
+        },
+        "secondary-hover": {
+          "value": "#146795",
+          "alias": "colors.primary.sky.700",
+          "description": null
+        },
+        "primary-pressed": {
+          "value": "#002522",
+          "alias": "colors.primary.green.900",
+          "description": null
+        },
+        "secondary-pressed": {
+          "value": "#0a334a",
+          "alias": "colors.primary.sky.900",
+          "description": null
+        },
+        "success-hover": {
+          "value": "#005721",
+          "alias": "colors.feedback.success.900",
+          "description": null
+        },
+        "neutral 250": {
+          "value": "#c7cdcc",
+          "alias": "colors.neutrals.250",
+          "description": null
+        },
+        "neutral 150": {
+          "value": "#e5e6e6",
+          "alias": "colors.neutrals.150",
+          "description": null
+        },
+        "primary-accent": {
+          "value": "#116c65",
+          "alias": "colors.primary.green.400",
+          "description": null
+        },
+        "neutral 0": {
+          "value": "#ffffff",
+          "alias": "colors.neutrals.0",
+          "description": null
+        }
+      }
+    }
+  },
+  "typography": {
+    "family": {
+      "be vietnam pro": "Be Vietnam Pro"
+    },
+    "weight": {
+      "regular": "regular",
+      "medium": "medium",
+      "semibold": "semibold",
+      "bold": "bold"
+    },
+    "size": {
+      "tiny": 12,
+      "small": 14,
+      "medium": 16,
+      "large": 18,
+      "xl": 20,
+      "2xl": 24,
+      "4xl": 32,
+      "5xl": 36,
+      "3xl": 28,
+      "6xl": 42,
+      "7xl": 54,
+      "8xl": 78,
+      "9xl": 90,
+      "chart": 10
+    },
+    "lineHeight": {
+      "tiny": 12,
+      "small": 14,
+      "medium": 16,
+      "large": 18,
+      "xl": 20,
+      "2xl": 24,
+      "3xl": 28,
+      "4xl": 32,
+      "5xl": 36,
+      "6xl": 42,
+      "7xl": 54,
+      "8xl": 78,
+      "9xl": 90
+    },
+    "textStyles": {
+      "display": {
+        "xl": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 90,
+          "lineHeight": 90,
+          "fontWeight": 700,
+          "letterSpacing": -2.25,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-9xl · font-size: 5.62rem · line-height: 5.62rem",
+          "aliases": {}
+        },
+        "l": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 78,
+          "lineHeight": 78,
+          "fontWeight": 700,
+          "letterSpacing": -1.95,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-8xl · font-size: 4.87rem · line-height: 4.87rem",
+          "aliases": {}
+        },
+        "m": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 54,
+          "lineHeight": 54,
+          "fontWeight": 700,
+          "letterSpacing": -1.35,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-7xl · font-size: 3.37rem · line-height: 3.37rem",
+          "aliases": {}
+        },
+        "s": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 42,
+          "lineHeight": 42,
+          "fontWeight": 700,
+          "letterSpacing": -1.05,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-6xl · font-size: 2.67rem · line-height: 2.67rem",
+          "aliases": {}
+        },
+        "t": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 36,
+          "lineHeight": 36,
+          "fontWeight": 700,
+          "letterSpacing": -0.9,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-5xl · font-size: 2.25rem · line-height: 2.25rem",
+          "aliases": {}
+        }
+      },
+      "heading": {
+        "l": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 32,
+          "lineHeight": 36,
+          "fontWeight": 600,
+          "letterSpacing": -0.8,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-4xl · font-size: 2rem · line-height: 2.25rem",
+          "aliases": {}
+        },
+        "m": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 28,
+          "lineHeight": 32,
+          "fontWeight": 600,
+          "letterSpacing": -0.7,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-3xl · font-size: 1.75rem · line-height: 2rem",
+          "aliases": {}
+        },
+        "s": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 24,
+          "lineHeight": 32,
+          "fontWeight": 700,
+          "letterSpacing": -0.6,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-2xl · font-size: 1.5rem · line-height: 2rem",
+          "aliases": {}
+        },
+        "t": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 20,
+          "lineHeight": 28,
+          "fontWeight": 700,
+          "letterSpacing": -0.5,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-xl · font-size: 1.25rem · line-height: 1.75rem",
+          "aliases": {}
+        }
+      },
+      "label": {
+        "l": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 18,
+          "lineHeight": 28,
+          "fontWeight": 500,
+          "letterSpacing": -0.27,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-lg· font-size: 1.125rem · line-height: 1.75rem",
+          "aliases": {}
+        },
+        "b": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 16,
+          "lineHeight": 24,
+          "fontWeight": 500,
+          "letterSpacing": -0.24,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-base · font-size: 1rem · line-height: 1.5rem",
+          "aliases": {}
+        },
+        "s": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 14,
+          "lineHeight": 20,
+          "fontWeight": 500,
+          "letterSpacing": -0.21,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-sm · font-size: 0.875rem · line-height: 1.25rem",
+          "aliases": {}
+        },
+        "t": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 12,
+          "lineHeight": 16,
+          "fontWeight": 500,
+          "letterSpacing": -0.18,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-xs · font-size: 0.75rem · line-height: 1rem",
+          "aliases": {}
+        },
+        "caption": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 12,
+          "lineHeight": 16,
+          "fontWeight": 500,
+          "letterSpacing": -0.12,
+          "textCase": "uppercase",
+          "textDecoration": "none",
+          "description": "text-cap · font-size: 0.75rem · line-height: 1rem",
+          "aliases": {}
+        },
+        "button-l": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 16,
+          "lineHeight": 24,
+          "fontWeight": 600,
+          "letterSpacing": -0.32,
+          "textCase": "uppercase",
+          "textDecoration": "none",
+          "description": null,
+          "aliases": {}
+        },
+        "button-m": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 13,
+          "lineHeight": 26,
+          "fontWeight": 600,
+          "letterSpacing": -0.26,
+          "textCase": "uppercase",
+          "textDecoration": "none",
+          "description": null,
+          "aliases": {}
+        },
+        "button-s": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 12,
+          "lineHeight": 26,
+          "fontWeight": 600,
+          "letterSpacing": -0.24,
+          "textCase": "uppercase",
+          "textDecoration": "none",
+          "description": null,
+          "aliases": {}
+        }
+      },
+      "paragraph": {
+        "l": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 18,
+          "lineHeight": 28,
+          "fontWeight": 400,
+          "letterSpacing": -0.27,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-lg· font-size: 1.125rem · line-height: 1.75rem",
+          "aliases": {}
+        },
+        "b": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 16,
+          "lineHeight": 24,
+          "fontWeight": 400,
+          "letterSpacing": -0.24,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-base · font-size: 1rem · line-height: 1.5rem",
+          "aliases": {}
+        },
+        "s": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 14,
+          "lineHeight": 20,
+          "fontWeight": 400,
+          "letterSpacing": -0.21,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-sm · font-size: 0.875rem · line-height: 1.25rem",
+          "aliases": {}
+        },
+        "t": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 12,
+          "lineHeight": 16,
+          "fontWeight": 400,
+          "letterSpacing": -0.18,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": "text-xs · font-size: 0.75rem · line-height: 1rem",
+          "aliases": {}
+        },
+        "chart": {
+          "fontFamily": "Be Vietnam Pro",
+          "fontSize": 10,
+          "lineHeight": 14,
+          "fontWeight": 400,
+          "letterSpacing": -0.15,
+          "textCase": "none",
+          "textDecoration": "none",
+          "description": null,
+          "aliases": {}
+        }
+      }
+    }
+  },
+  "size": {
+    "space": {
+      "0": {
+        "value": 0,
+        "unit": "px",
+        "alias": null
+      },
+      "1": {
+        "value": 4,
+        "unit": "px",
+        "alias": null
+      },
+      "2": {
+        "value": 8,
+        "unit": "px",
+        "alias": null
+      },
+      "3": {
+        "value": 12,
+        "unit": "px",
+        "alias": null
+      },
+      "4": {
+        "value": 16,
+        "unit": "px",
+        "alias": null
+      },
+      "5": {
+        "value": 20,
+        "unit": "px",
+        "alias": null
+      },
+      "6": {
+        "value": 24,
+        "unit": "px",
+        "alias": null
+      },
+      "7": {
+        "value": 28,
+        "unit": "px",
+        "alias": null
+      },
+      "8": {
+        "value": 32,
+        "unit": "px",
+        "alias": null
+      },
+      "9": {
+        "value": 36,
+        "unit": "px",
+        "alias": null
+      },
+      "10": {
+        "value": 40,
+        "unit": "px",
+        "alias": null
+      },
+      "11": {
+        "value": 44,
+        "unit": "px",
+        "alias": null
+      },
+      "12": {
+        "value": 48,
+        "unit": "px",
+        "alias": null
+      },
+      "14": {
+        "value": 56,
+        "unit": "px",
+        "alias": null
+      },
+      "16": {
+        "value": 64,
+        "unit": "px",
+        "alias": null
+      },
+      "20": {
+        "value": 80,
+        "unit": "px",
+        "alias": null
+      },
+      "24": {
+        "value": 96,
+        "unit": "px",
+        "alias": null
+      },
+      "28": {
+        "value": 112,
+        "unit": "px",
+        "alias": null
+      },
+      "32": {
+        "value": 128,
+        "unit": "px",
+        "alias": null
+      },
+      "36": {
+        "value": 144,
+        "unit": "px",
+        "alias": null
+      },
+      "40": {
+        "value": 160,
+        "unit": "px",
+        "alias": null
+      },
+      "60": {
+        "value": 240,
+        "unit": "px",
+        "alias": null
+      },
+      "0,25": {
+        "value": 1,
+        "unit": "px",
+        "alias": null
+      },
+      "0,5": {
+        "value": 2,
+        "unit": "px",
+        "alias": null
+      },
+      "1,5": {
+        "value": 6,
+        "unit": "px",
+        "alias": null
+      },
+      "2,5": {
+        "value": 10,
+        "unit": "px",
+        "alias": null
+      },
+      "3,5": {
+        "value": 14,
+        "unit": "px",
+        "alias": null
+      }
+    },
+    "radius": {
+      "s": {
+        "value": 2,
+        "unit": "px",
+        "alias": "size.space.0,5"
+      },
+      "m": {
+        "value": 4,
+        "unit": "px",
+        "alias": "size.space.1"
+      },
+      "l": {
+        "value": 8,
+        "unit": "px",
+        "alias": "size.space.2"
+      },
+      "full": {
+        "value": 99999,
+        "unit": "px",
+        "alias": null
+      },
+      "none": {
+        "value": 0,
+        "unit": "px",
+        "alias": "size.space.0"
+      },
+      "xl": {
+        "value": 16,
+        "unit": "px",
+        "alias": "size.space.4"
+      },
+      "2xl": {
+        "value": 24,
+        "unit": "px",
+        "alias": "size.space.6"
+      }
+    },
+    "stroke": {
+      "none": {
+        "value": 0,
+        "unit": "px",
+        "alias": "size.space.0"
+      },
+      "default": {
+        "value": 1,
+        "unit": "px",
+        "alias": "size.space.0,25"
+      },
+      "active": {
+        "value": 1.5,
+        "unit": "px",
+        "alias": null
+      },
+      "focus": {
+        "value": 2,
+        "unit": "px",
+        "alias": "size.space.0,5"
+      },
+      "focus ring": {
+        "value": 4,
+        "unit": "px",
+        "alias": "size.space.1"
+      }
+    },
+    "icons": {
+      "s": {
+        "value": 24,
+        "unit": "px",
+        "alias": null
+      },
+      "m": {
+        "value": 32,
+        "unit": "px",
+        "alias": null
+      },
+      "l": {
+        "value": 44,
+        "unit": "px",
+        "alias": null
+      },
+      "xs": {
+        "value": 16,
+        "unit": "px",
+        "alias": null
+      }
+    }
+  },
+  "effects": {
+    "shadow-1": {
+      "layers": [
+        {
+          "type": "dropShadow",
+          "x": 0,
+          "y": 1,
+          "blur": 4,
+          "spread": 0,
+          "color": "#0c0c0d",
+          "alpha": 0.051
+        }
+      ],
+      "css": "0px 1px 4px 0px rgba(12, 12, 13, 0.051)"
+    },
+    "shadow-2": {
+      "layers": [
+        {
+          "type": "dropShadow",
+          "x": 0,
+          "y": 2,
+          "blur": 4,
+          "spread": -2,
+          "color": "#0c0c0d",
+          "alpha": 0.051
+        },
+        {
+          "type": "dropShadow",
+          "x": 0,
+          "y": 4,
+          "blur": 6,
+          "spread": -2,
+          "color": "#0c0c0d",
+          "alpha": 0.102
+        }
+      ],
+      "css": "0px 2px 4px -2px rgba(12, 12, 13, 0.051), 0px 4px 6px -2px rgba(12, 12, 13, 0.102)"
+    },
+    "shadow-3": {
+      "layers": [
+        {
+          "type": "dropShadow",
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": -2,
+          "color": "#0c0c0d",
+          "alpha": 0.051
+        },
+        {
+          "type": "dropShadow",
+          "x": 0,
+          "y": 12,
+          "blur": 16,
+          "spread": -4,
+          "color": "#0c0c0d",
+          "alpha": 0.078
+        }
+      ],
+      "css": "0px 4px 4px -2px rgba(12, 12, 13, 0.051), 0px 12px 16px -4px rgba(12, 12, 13, 0.078)"
+    },
+    "shadow-4": {
+      "layers": [
+        {
+          "type": "dropShadow",
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": -4,
+          "color": "#0c0c0d",
+          "alpha": 0.051
+        },
+        {
+          "type": "dropShadow",
+          "x": 0,
+          "y": 16,
+          "blur": 32,
+          "spread": -4,
+          "color": "#0c0c0d",
+          "alpha": 0.102
+        }
+      ],
+      "css": "0px 4px 4px -4px rgba(12, 12, 13, 0.051), 0px 16px 32px -4px rgba(12, 12, 13, 0.102)"
+    },
+    "shadow-5": {
+      "layers": [
+        {
+          "type": "dropShadow",
+          "x": 0,
+          "y": 16,
+          "blur": 32,
+          "spread": -8,
+          "color": "#0c0c0d",
+          "alpha": 0.4
+        }
+      ],
+      "css": "0px 16px 32px -8px rgba(12, 12, 13, 0.4)"
+    }
+  },
+  "grid": {
+    "mobile-375": {
+      "pattern": "columns",
+      "gutterSize": 12,
+      "alignment": "stretch",
+      "count": 4,
+      "offset": 16
+    },
+    "tablet-768": {
+      "pattern": "columns",
+      "gutterSize": 20,
+      "alignment": "stretch",
+      "count": 6,
+      "offset": 32
+    },
+    "desktop-1440": {
+      "pattern": "columns",
+      "gutterSize": 16,
+      "alignment": "stretch",
+      "count": 2,
+      "offset": 90
+    }
+  },
+  "devices": {
+    "size": 375
+  }
+}

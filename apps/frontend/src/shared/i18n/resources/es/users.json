@@ -1,0 +1,76 @@
+{
+  "list": {
+    "title": "Usuarios",
+    "subtitle": "Gestiona las personas registradas en el sistema y su rol asignado.",
+    "createButton": "+ Crear usuario",
+    "paginationAria": "Paginación de usuarios",
+    "columns": {
+      "nombre": "Nombre",
+      "email": "Email",
+      "rol": "Rol",
+      "estado": "Estado",
+      "acciones": "Acciones"
+    },
+    "loading": "Cargando usuarios…",
+    "emptyFirst": "Todavía no hay usuarios. Crea el primero para empezar.",
+    "rolesLoadError": "No se han podido cargar los roles. Sin roles no se pueden crear ni editar usuarios.",
+    "noRolesYet": "Todavía no hay roles creados. Crea un rol antes de añadir usuarios."
+  },
+  "detail": {
+    "back": "← Volver a usuarios",
+    "loading": "Cargando usuario…",
+    "editButton": "Editar usuario",
+    "section": {
+      "title": "Datos del usuario"
+    },
+    "fields": {
+      "nombre": "Nombre",
+      "email": "Email",
+      "rol": "Rol",
+      "estado": "Estado"
+    }
+  },
+  "nav": {
+    "aria": "Navegación"
+  },
+  "form": {
+    "createTitle": "Crear usuario",
+    "editTitle": "Editar usuario",
+    "submit": {
+      "create": "Crear usuario",
+      "edit": "Guardar cambios"
+    },
+    "fields": {
+      "nombre": {
+        "label": "Nombre"
+      },
+      "email": {
+        "label": "Email"
+      },
+      "rol": {
+        "label": "Rol",
+        "placeholder": "Selecciona un rol"
+      },
+      "activo": {
+        "label": "Usuario activo"
+      }
+    },
+    "errors": {
+      "nombreMin": "El nombre debe tener al menos 2 caracteres.",
+      "nombreMax": "El nombre no puede superar los 80 caracteres.",
+      "emailRequired": "El email es obligatorio.",
+      "emailInvalid": "Introduce un email con un formato válido.",
+      "rolRequired": "Selecciona un rol."
+    }
+  },
+  "toast": {
+    "created": "Usuario \"{{nombre}}\" creado.",
+    "updated": "Usuario \"{{nombre}}\" actualizado.",
+    "deleted": "Usuario \"{{nombre}}\" eliminado."
+  },
+  "delete": {
+    "title": "Eliminar usuario",
+    "confirm": "¿Seguro que quieres eliminar a \"{{nombre}}\"? Esta acción no se puede deshacer.",
+    "error": "No se ha podido eliminar el usuario. Inténtalo de nuevo."
+  }
+}

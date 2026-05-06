@@ -1,0 +1,8 @@
+{
+  "label": "Estado del sistema",
+  "loading": "Comprobando…",
+  "status": {
+    "ok": "Operativo",
+    "error": "Con incidencias"
+  }
+}

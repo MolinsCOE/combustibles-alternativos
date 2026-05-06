@@ -1,0 +1,76 @@
+{
+  "list": {
+    "title": "Users",
+    "subtitle": "Manage the people registered in the system and their assigned role.",
+    "createButton": "+ Create user",
+    "paginationAria": "Users pagination",
+    "columns": {
+      "nombre": "Name",
+      "email": "Email",
+      "rol": "Role",
+      "estado": "Status",
+      "acciones": "Actions"
+    },
+    "loading": "Loading users…",
+    "emptyFirst": "There are no users yet. Create the first one to get started.",
+    "rolesLoadError": "Roles could not be loaded. Without roles you cannot create or edit users.",
+    "noRolesYet": "There are no roles yet. Create a role before adding users."
+  },
+  "detail": {
+    "back": "← Back to users",
+    "loading": "Loading user…",
+    "editButton": "Edit user",
+    "section": {
+      "title": "User data"
+    },
+    "fields": {
+      "nombre": "Name",
+      "email": "Email",
+      "rol": "Role",
+      "estado": "Status"
+    }
+  },
+  "nav": {
+    "aria": "Navigation"
+  },
+  "form": {
+    "createTitle": "Create user",
+    "editTitle": "Edit user",
+    "submit": {
+      "create": "Create user",
+      "edit": "Save changes"
+    },
+    "fields": {
+      "nombre": {
+        "label": "Name"
+      },
+      "email": {
+        "label": "Email"
+      },
+      "rol": {
+        "label": "Role",
+        "placeholder": "Select a role"
+      },
+      "activo": {
+        "label": "Active user"
+      }
+    },
+    "errors": {
+      "nombreMin": "Name must be at least 2 characters long.",
+      "nombreMax": "Name cannot exceed 80 characters.",
+      "emailRequired": "Email is required.",
+      "emailInvalid": "Enter an email with a valid format.",
+      "rolRequired": "Select a role."
+    }
+  },
+  "toast": {
+    "created": "User \"{{nombre}}\" created.",
+    "updated": "User \"{{nombre}}\" updated.",
+    "deleted": "User \"{{nombre}}\" deleted."
+  },
+  "delete": {
+    "title": "Delete user",
+    "confirm": "Are you sure you want to delete \"{{nombre}}\"? This action cannot be undone.",
+    "error": "The user could not be deleted. Please try again."
+  }
+}

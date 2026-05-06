@@ -1,0 +1,16 @@
+{
+  "inputs": [],
+  "servers": {
+    "postgres": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/scripts/mcp-postgres.mjs"
+      ]
+    },
+    "figma": {
+      "url": "https://mcp.figma.com/mcp",
+      "type": "http"
+    }
+  }
+}

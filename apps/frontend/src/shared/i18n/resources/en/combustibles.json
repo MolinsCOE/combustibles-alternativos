@@ -1,0 +1,390 @@
+{
+  "nav": {
+    "module": "Alternative Fuels",
+    "dashboard": "Dashboard",
+    "solicitud": "Production Request",
+    "distribucion": "Distribution",
+    "confirmacion": "Confirmation",
+    "seguimiento": "Tracking",
+    "maestros": "Masters"
+  },
+  "estados": {
+    "borrador": "Draft",
+    "pendiente_distribucion": "Pending distribution",
+    "en_distribucion": "In distribution",
+    "enviada": "Sent",
+    "confirmada": "Confirmed",
+    "cerrada": "Closed"
+  },
+  "confirmacion_estado": {
+    "pendiente": "Pending",
+    "confirmada": "Confirmed",
+    "rechazada": "Rejected"
+  },
+  "dias": {
+    "lunes": "M",
+    "martes": "T",
+    "miercoles": "W",
+    "jueves": "T",
+    "viernes": "F",
+    "sabado": "S",
+    "domingo": "S",
+    "lunes_full": "Monday",
+    "martes_full": "Tuesday",
+    "miercoles_full": "Wednesday",
+    "jueves_full": "Thursday",
+    "viernes_full": "Friday",
+    "sabado_full": "Saturday",
+    "domingo_full": "Sunday"
+  },
+  "dashboard": {
+    "title": "Dashboard — Alternative Fuels",
+    "subtitle": "Workflow to coordinate production, purchasing and suppliers",
+    "semana": "Week {{semana}} / {{anyo}}",
+    "kpis": {
+      "viajesHoy": "Trips today",
+      "viajesPlanHoy": "Plan today",
+      "desviacion": "Deviation",
+      "pendientesEnvio": "Pending to send",
+      "incidenciasActivas": "Active incidents",
+      "lineasPendientesConfirmacion": "Lines pending confirmation",
+      "cumplimiento": "Week compliance %"
+    },
+    "tablaSemana": {
+      "title": "Active week summary",
+      "material": "Material",
+      "planificados": "Planned",
+      "confirmados": "Confirmed",
+      "reales": "Actual",
+      "desviacion": "Deviation"
+    },
+    "accesosRapidos": {
+      "title": "Quick access",
+      "nuevaSolicitud": "New request",
+      "nuevaSolicitudDesc": "Create or edit the week request",
+      "distribuir": "Distribute trips",
+      "distribuirDesc": "Assign trips to suppliers and carriers",
+      "seguimiento": "View tracking",
+      "seguimientoDesc": "Actual vs planned tracking for the day",
+      "maestros": "Masters",
+      "maestrosDesc": "Manage materials, suppliers and carriers"
+    },
+    "sinPlanificacion": "No active planning for this week."
+  },
+  "solicitud": {
+    "title": "Weekly Production Request",
+    "subtitle": "Enter the number of trips per material and day",
+    "nuevaSolicitud": "New request",
+    "semanaLabel": "Week",
+    "comentarioGeneral": "General comment",
+    "comentarioGeneralPlaceholder": "Notes for Purchasing about this week (optional)",
+    "comentarioLinea": "Note",
+    "guardarBorrador": "Save draft",
+    "enviarCompras": "Send to Purchasing",
+    "material": "Material",
+    "destino": "Destination",
+    "total": "Total",
+    "columns": {
+      "material": "Material",
+      "destino": "Destination",
+      "total": "Total",
+      "comentario": "Note"
+    },
+    "estados": {
+      "label": "Status"
+    },
+    "historial": {
+      "title": "Previous requests",
+      "semana": "Week",
+      "estado": "Status",
+      "acciones": "Actions"
+    },
+    "toast": {
+      "guardado": "Request saved as draft",
+      "enviado": "Request sent to Purchasing"
+    },
+    "confirm": {
+      "enviar": "Send the request to Purchasing? Once sent, you will not be able to edit it while Purchasing is distributing.",
+      "enviarTitle": "Confirm submission"
+    }
+  },
+  "distribucion": {
+    "title": "Purchasing Distribution",
+    "subtitle": "Assign trips to suppliers and carriers for the week",
+    "solicitudRecibida": "Production Request",
+    "totalSemanal": "Weekly total (Purchasing)",
+    "sugerenciaReparto": "Suggested distribution",
+    "enviarCorreos": "Send emails",
+    "enviarTodos": "Send all",
+    "reenviarLinea": "Resend",
+    "columns": {
+      "material": "Material",
+      "proveedor": "Supplier",
+      "transportista": "Carrier",
+      "destino": "Destination",
+      "total": "Total",
+      "correoEnviado": "Email",
+      "confirmacion": "Confirmation"
+    },
+    "badgeEnviado": "Sent",
+    "badgePendiente": "Pending",
+    "aviso": {
+      "decimales": "Percentage calculation produces decimals. Adjust manually to balance the sum.",
+      "sumaDiferente": "Sum of days ({{suma}}) does not match the assigned total ({{total}})."
+    },
+    "toast": {
+      "correosEnviados": "Emails sent successfully",
+      "guardado": "Distribution saved"
+    }
+  },
+  "confirmacion": {
+    "title": "Planning confirmation",
+    "subtitle": "Review and confirm the trips assigned to your company",
+    "confirmarTodo": "Confirm all",
+    "columns": {
+      "material": "Material",
+      "destino": "Destination",
+      "restriccion": "Schedule",
+      "total": "Total",
+      "estado": "Status",
+      "acciones": "Actions"
+    },
+    "confirmar": "Confirm",
+    "rechazar": "Reject",
+    "motivoRechazo": "Rejection reason",
+    "motivoRechazoPlaceholder": "Explain the reason for rejection (required)",
+    "motivoObligatorio": "The reason is required to reject",
+    "modalRechazoTitle": "Reject line",
+    "toast": {
+      "confirmada": "Line confirmed",
+      "rechazada": "Line rejected",
+      "todoConfirmado": "All planning confirmed"
+    },
+    "sinLineas": "You have no lines pending confirmation.",
+    "semana": "Week {{semana}} / {{anyo}}"
+  },
+  "seguimiento": {
+    "title": "Tracking — Actual vs planned",
+    "subtitle": "Compare confirmed trips with those actually received",
+    "diaLabel": "Day",
+    "registrarViajes": "Register actual trips",
+    "columns": {
+      "material": "Material",
+      "proveedor": "Supplier",
+      "transportista": "Carrier",
+      "planificado": "Planned",
+      "confirmado": "Confirmed",
+      "real": "Actual",
+      "desviacion": "Deviation",
+      "estado": "Status",
+      "motivo": "Reason"
+    },
+    "estados": {
+      "ok": "OK",
+      "incidencia": "Incident",
+      "aviso": "Warning"
+    },
+    "formulario": {
+      "title": "Register actual trips for the day",
+      "material": "Material",
+      "proveedor": "Supplier",
+      "transportista": "Carrier",
+      "viajes": "No. of trips",
+      "guardar": "Save",
+      "cancelar": "Cancel"
+    },
+    "incidencias": {
+      "title": "Incidents for the period",
+      "comentario": "Internal comment",
+      "comentarioPlaceholder": "Add a note about this incident (optional)"
+    },
+    "toast": {
+      "guardado": "Actual trips registered"
+    },
+    "importar": {
+      "boton": "Import Prosegur file",
+      "title": "Import actual trips — Prosegur file",
+      "cerrar": "Close",
+      "avisoFormato": "The file must be in CSV format (exported from Excel). Columns must follow the order of the daily Prosegur file.",
+      "ficheroLabel": "Select the Prosegur CSV file",
+      "seleccionarFichero": "Choose file",
+      "cargando": "Reading file…",
+      "errorLectura": "Could not read the file. Please check it is a valid CSV.",
+      "sinFilas": "The file contains no rows with valid data.",
+      "filasMapeadas": "{{n}} row(s) recognised correctly",
+      "filasNoMapeadas": "{{n}} row(s) not recognised (manual review required)",
+      "filasOmitidas": "{{n}} row(s) skipped due to invalid format",
+      "textoOriginal": "Unrecognised original text",
+      "noReconocido": "Not recognised",
+      "revisar": "Review",
+      "ok": "OK",
+      "cancelar": "Cancel",
+      "confirmar": "Confirm import",
+      "col": {
+        "fecha": "Date",
+        "materialDetectado": "Detected material",
+        "proveedor": "Supplier",
+        "transportista": "Carrier",
+        "horaEntrada": "Entry time",
+        "horaSalida": "Exit time",
+        "destino": "Destination",
+        "estado": "Status"
+      },
+      "toast": {
+        "importadoOk": "File imported. Cross-reference updated.",
+        "importadoConAvisos": "File imported. {{n}} row(s) not recognised require manual review."
+      }
+    }
+  },
+  "maestros": {
+    "title": "Masters — Alternative Fuels",
+    "subtitle": "Manage the module configuration catalogs",
+    "tabs": {
+      "materiales": "Materials",
+      "destinos": "Destinations",
+      "proveedores": "Suppliers",
+      "transportistas": "Carriers",
+      "asignaciones": "Assignments"
+    },
+    "materiales": {
+      "title": "Materials",
+      "crear": "New material",
+      "columns": {
+        "nombre": "Name",
+        "destino": "Default destination",
+        "restriccion": "Time restriction",
+        "activo": "Active",
+        "acciones": "Actions"
+      },
+      "form": {
+        "title_create": "New material",
+        "title_edit": "Edit material",
+        "nombre": "Name",
+        "destino": "Default destination",
+        "restriccionInicio": "Restriction start time",
+        "restriccionFin": "Restriction end time",
+        "activo": "Active",
+        "errors": {
+          "nombreRequerido": "Name is required",
+          "destinoRequerido": "Destination is required",
+          "finSiInicio": "If there is a start time, end time is also required",
+          "inicioSiFin": "If there is an end time, start time is also required"
+        }
+      },
+      "sinRestriccion": "No restriction",
+      "toast": {
+        "creado": "Material created",
+        "editado": "Material updated",
+        "desactivado": "Material deactivated"
+      }
+    },
+    "destinos": {
+      "title": "Destinations",
+      "crear": "New destination",
+      "columns": {
+        "nombre": "Name",
+        "activo": "Active",
+        "acciones": "Actions"
+      },
+      "form": {
+        "title_create": "New destination",
+        "title_edit": "Edit destination",
+        "nombre": "Name",
+        "activo": "Active",
+        "errors": {
+          "nombreRequerido": "Name is required"
+        }
+      },
+      "toast": {
+        "creado": "Destination created",
+        "editado": "Destination updated"
+      }
+    },
+    "proveedores": {
+      "title": "Suppliers",
+      "crear": "New supplier",
+      "columns": {
+        "nombre": "Name",
+        "email": "Email",
+        "activo": "Active",
+        "acciones": "Actions"
+      },
+      "form": {
+        "title_create": "New supplier",
+        "title_edit": "Edit supplier",
+        "nombre": "Name",
+        "email": "Contact email",
+        "activo": "Active",
+        "errors": {
+          "nombreRequerido": "Name is required",
+          "emailRequerido": "Email is required",
+          "emailInvalido": "Email format is not valid"
+        }
+      },
+      "toast": {
+        "creado": "Supplier created",
+        "editado": "Supplier updated"
+      }
+    },
+    "transportistas": {
+      "title": "Carriers",
+      "crear": "New carrier",
+      "columns": {
+        "nombre": "Name",
+        "correos": "Emails",
+        "activo": "Active",
+        "acciones": "Actions"
+      },
+      "form": {
+        "title_create": "New carrier",
+        "title_edit": "Edit carrier",
+        "nombre": "Name",
+        "emails": "Contact emails",
+        "addEmail": "Add email",
+        "activo": "Active",
+        "errors": {
+          "nombreRequerido": "Name is required",
+          "emailRequerido": "At least one email is required",
+          "emailInvalido": "Email {{index}} has an invalid format"
+        }
+      },
+      "toast": {
+        "creado": "Carrier created",
+        "editado": "Carrier updated"
+      }
+    },
+    "asignaciones": {
+      "title": "Supplier–carrier assignments",
+      "crear": "New assignment",
+      "columns": {
+        "material": "Material",
+        "proveedor": "Supplier",
+        "transportista": "Carrier",
+        "porcentaje": "% trips",
+        "acciones": "Actions"
+      },
+      "form": {
+        "title_create": "New assignment",
+        "title_edit": "Edit assignment",
+        "material": "Material",
+        "proveedor": "Supplier",
+        "transportista": "Carrier",
+        "porcentaje": "Trip percentage",
+        "errors": {
+          "materialRequerido": "Material is required",
+          "proveedorRequerido": "Supplier is required",
+          "transportistaRequerido": "Carrier is required",
+          "porcentajeRequerido": "Percentage is required",
+          "porcentajeRango": "Percentage must be between 1 and 100",
+          "suma100": "Sum of percentages for this material and supplier must be exactly 100%"
+        }
+      },
+      "advertencia100": "Current sum: {{suma}}% (must be 100%)",
+      "toast": {
+        "creado": "Assignment created",
+        "editado": "Assignment updated",
+        "eliminado": "Assignment deleted"
+      }
+    }
+  }
+}

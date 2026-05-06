@@ -1,0 +1,66 @@
+{
+  "list": {
+    "title": "Roles",
+    "subtitle": "Gestiona los roles del sistema. Cada usuario pertenece a un rol.",
+    "createButton": "+ Crear rol",
+    "paginationAria": "Paginación de roles",
+    "columns": {
+      "nombre": "Nombre",
+      "descripcion": "Descripción",
+      "usuarios": "Usuarios",
+      "acciones": "Acciones"
+    },
+    "loading": "Cargando roles…",
+    "emptyFirst": "Todavía no hay roles. Crea el primero para empezar.",
+    "emptyDescription": "—"
+  },
+  "detail": {
+    "back": "← Volver a roles",
+    "loading": "Cargando rol…",
+    "editButton": "Editar rol",
+    "noDescription": "Sin descripción.",
+    "usersSection": "Usuarios con este rol",
+    "usersEmpty": "Este rol todavía no tiene usuarios asignados. Puedes eliminarlo si ya no lo necesitas.",
+    "columns": {
+      "nombre": "Nombre",
+      "email": "Email",
+      "estado": "Estado"
+    }
+  },
+  "nav": {
+    "aria": "Navegación"
+  },
+  "form": {
+    "createTitle": "Crear rol",
+    "editTitle": "Editar rol",
+    "submit": {
+      "create": "Crear rol",
+      "edit": "Guardar cambios"
+    },
+    "fields": {
+      "nombre": {
+        "label": "Nombre"
+      },
+      "descripcion": {
+        "label": "Descripción"
+      }
+    },
+    "errors": {
+      "nombreMin": "El nombre debe tener al menos 2 caracteres.",
+      "nombreMax": "El nombre no puede superar los 60 caracteres.",
+      "descripcionMax": "La descripción no puede superar los 240 caracteres."
+    }
+  },
+  "toast": {
+    "created": "Rol \"{{nombre}}\" creado.",
+    "updated": "Rol \"{{nombre}}\" actualizado.",
+    "deleted": "Rol \"{{nombre}}\" eliminado."
+  },
+  "delete": {
+    "title": "Eliminar rol",
+    "confirm": "¿Seguro que quieres eliminar el rol \"{{nombre}}\"? Esta acción no se puede deshacer.",
+    "blockedOne": "No se puede eliminar el rol \"{{nombre}}\" porque tiene {{count}} usuario asignado. Reasigna o elimina primero ese usuario.",
+    "blockedOther": "No se puede eliminar el rol \"{{nombre}}\" porque tiene {{count}} usuarios asignados. Reasigna o elimina primero esos usuarios.",
+    "error": "No se ha podido eliminar el rol. Inténtalo de nuevo."
+  }
+}

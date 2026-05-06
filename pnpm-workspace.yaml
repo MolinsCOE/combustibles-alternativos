@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+
+# Supply-chain safety: ignora cualquier version de paquete publicada
+# hace menos de 2 dias (2880 minutos). Reduce el riesgo de instalar
+# versiones recien comprometidas antes de que la comunidad las detecte.
+# Ver: https://pnpm.io/settings#minimumreleaseage
+minimumReleaseAge: 2880

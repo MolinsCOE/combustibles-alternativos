@@ -1,0 +1,55 @@
+name: Validate Version Update
+
+on:
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed paths
+        id: changed
+        run: |
+          CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          echo "Changed files:"
+          echo "$CHANGED"
+
+          BACKEND=false
+          FRONTEND=false
+
+          if echo "$CHANGED" | grep -q '^apps/backend/'; then BACKEND=true; fi
+          if echo "$CHANGED" | grep -q '^apps/frontend/'; then FRONTEND=true; fi
+
+          echo "backend=$BACKEND" >> "$GITHUB_OUTPUT"
+          echo "frontend=$FRONTEND" >> "$GITHUB_OUTPUT"
+
+      - name: Validate backend version bumped
+        if: steps.changed.outputs.backend == 'true'
+        run: |
+          BASE_VERSION=$(git show origin/${{ github.base_ref }}:apps/backend/package.json | jq -r .version)
+          PR_VERSION=$(jq -r .version apps/backend/package.json)
+          echo "Base: $BASE_VERSION  →  PR: $PR_VERSION"
+          if [ "$BASE_VERSION" = "$PR_VERSION" ]; then
+            echo "❌ apps/backend/package.json version was not bumped (still $PR_VERSION)."
+            echo "   Follow SemVer: patch for bug-fix, minor for feature, major for breaking change."
+            exit 1
+          fi
+          echo "✅ Backend version bumped: $BASE_VERSION → $PR_VERSION"
+
+      - name: Validate frontend version bumped
+        if: steps.changed.outputs.frontend == 'true'
+        run: |
+          BASE_VERSION=$(git show origin/${{ github.base_ref }}:apps/frontend/package.json | jq -r .version)
+          PR_VERSION=$(jq -r .version apps/frontend/package.json)
+          echo "Base: $BASE_VERSION  →  PR: $PR_VERSION"
+          if [ "$BASE_VERSION" = "$PR_VERSION" ]; then
+            echo "❌ apps/frontend/package.json version was not bumped (still $PR_VERSION)."
+            echo "   Follow SemVer: patch for bug-fix, minor for feature, major for breaking change."
+            exit 1
+          fi
+          echo "✅ Frontend version bumped: $BASE_VERSION → $PR_VERSION"

@@ -1,0 +1,14 @@
+export { DashboardPage } from "./pages/DashboardPage.js";
+export { SolicitudPage } from "./pages/SolicitudPage.js";
+export { DistribucionPage } from "./pages/DistribucionPage.js";
+export { ConfirmacionPage } from "./pages/ConfirmacionPage.js";
+export { SeguimientoPage } from "./pages/SeguimientoPage.js";
+export { MaestrosPage } from "./pages/MaestrosPage.js";
+export { LoginPage } from "./pages/LoginPage.js";
+export { PlanificacionProveedorPage } from "./pages/PlanificacionProveedorPage.js";
+export { MisSolicitudesPage } from "./pages/MisSolicitudesPage.js";
+export { EstadoSuministroPage } from "./pages/EstadoSuministroPage.js";
+export { SolicitudesRecibidasPage } from "./pages/SolicitudesRecibidasPage.js";
+export { ConfirmacionesProveedoresPage } from "./pages/ConfirmacionesProveedoresPage.js";
+export { HistorialConfirmacionesPage } from "./pages/HistorialConfirmacionesPage.js";
+export { ConfirmarLineaPage } from "./pages/ConfirmarLineaPage.js";
