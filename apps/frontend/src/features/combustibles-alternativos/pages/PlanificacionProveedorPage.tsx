@@ -58,7 +58,7 @@ export function PlanificacionProveedorPage() {
   const [semanaFiltro, setSemanaFiltro] = useState<string>("todas");
   const [modal, setModal] = useState<ModalState>({ open: false });
   const [motivoError, setMotivoError] = useState(false);
-  const [toast, setToast] = useState<string | null>(null);
+  const [toasts, setToasts] = useState<{ id: number; msg: string }[]>([]);
   const motivoRef = useRef<HTMLTextAreaElement>(null);
 
   // Semanas disponibles para filtrar, ordenadas por número de semana
@@ -76,8 +76,9 @@ export function PlanificacionProveedorPage() {
   }, [lineas, state.solicitudes]);
 
   const showToast = (msg: string) => {
-    setToast(msg);
-    window.setTimeout(() => setToast(null), 4000);
+    const id = Date.now();
+    setToasts((prev) => [...prev, { id, msg }]);
+    window.setTimeout(() => setToasts((prev) => prev.filter((t) => t.id !== id)), 2500);
   };
 
   useEffect(() => {
@@ -223,12 +224,6 @@ export function PlanificacionProveedorPage() {
           </div>
         </header>
 
-        {toast && (
-          <div className="toast toast--success" role="status">
-            {toast}
-          </div>
-        )}
-
         {pendientes.length === 0 && (
           <div style={{ textAlign: "center", padding: "2rem 0" }}>
             <p className="empty-state">No tienes confirmaciones pendientes.</p>
@@ -242,7 +237,8 @@ export function PlanificacionProveedorPage() {
                 <tr>
                   <th scope="col">Material</th>
                   <th scope="col">Semana</th>
-                  <th scope="col">Proveedor</th>
+                  <th scope="col">Origen</th>
+                  <th scope="col">Destino</th>
                   <th scope="col">Transportista</th>
                   {DIAS_ABR.map((d) => (
                     <th key={d} scope="col" className="table__col--numeric combustibles-dia-col">{d}</th>
@@ -260,6 +256,7 @@ export function PlanificacionProveedorPage() {
                       <td className="combustibles-material-cell">{linea.materialNom}</td>
                       <td>{getSemana(linea.solicitudId)}</td>
                       <td>{linea.proveedorNom}</td>
+                      <td>{linea.destino || "—"}</td>
                       <td className="table__col--muted">{linea.transportistaNom}</td>
                       {DIAS_KEYS.map((k) => (
                         <td key={k} className="table__col--numeric combustibles-dia-col">
@@ -314,7 +311,8 @@ export function PlanificacionProveedorPage() {
                 <tr>
                   <th scope="col">Material</th>
                   <th scope="col">Semana</th>
-                  <th scope="col">Proveedor</th>
+                  <th scope="col">Origen</th>
+                  <th scope="col">Destino</th>
                   <th scope="col">Transportista</th>
                   {DIAS_ABR.map((d) => (
                     <th key={d} scope="col" className="table__col--numeric combustibles-dia-col">{d}</th>
@@ -333,6 +331,7 @@ export function PlanificacionProveedorPage() {
                       <td className="combustibles-material-cell">{linea.materialNom}</td>
                       <td>{getSemana(linea.solicitudId)}</td>
                       <td>{linea.proveedorNom}</td>
+                      <td>{linea.destino || "—"}</td>
                       <td className="table__col--muted">{linea.transportistaNom}</td>
                       {DIAS_KEYS.map((k) => (
                         <td key={k} className="table__col--numeric combustibles-dia-col">
@@ -374,6 +373,12 @@ export function PlanificacionProveedorPage() {
           </p>
         </section>
       )}
+
+      <div className="toast-stack">
+        {toasts.map((t) => (
+          <div key={t.id} className="toast toast--success">{t.msg}</div>
+        ))}
+      </div>
 
       {/* Modal de confirmación / rechazo */}
       {modal.open && (

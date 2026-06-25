@@ -1,6 +1,6 @@
 {
   "modulo": "gestion-jornada",
-  "ramaFeature": null,
+  "ramaFeature": "feature/gestion-jornada",
   "baseRama": "develop",
   "tareas": [
     {

@@ -3,19 +3,27 @@
 /* eslint-disable react-refresh/only-export-components */
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
-  useReducer,
   useRef,
-  type Dispatch,
+  useState,
   type ReactNode,
 } from "react";
-
-const LS_KEY = "ca_store_v2";
+import { combustiblesService } from "../services/combustibles.service.js";
+import type { EstadoCompleto } from "../services/combustibles.service.js";
 
 // ---------------------------------------------------------------------------
-// Tipos del dominio
+// Tipos del dominio — se mantienen para compatibilidad con las páginas
 // ---------------------------------------------------------------------------
+
+export type CambioHistorial = {
+  id: number;
+  ts: string;
+  autor: "produccion" | "compras";
+  motivo: string;
+  descripcion: string;
+};
 
 export type EstadoSolicitud =
   | "borrador"
@@ -46,19 +54,22 @@ export type LineaSolicitud = {
   dv: number;
   ds: number;
   dg: number;
+  destino: string;
   obs: string;
 };
 
 export type Solicitud = {
   id: number;
-  semana: string;    // p.ej. "S19"
-  ini: string;       // ISO date
-  fi: string;        // ISO date
+  semana: string;
+  ini: string;
+  fi: string;
   creadaPor: string;
   estado: EstadoSolicitud;
-  ts: string;        // ISO datetime
+  ts: string;
   comentarioGeneral: string;
+  mantenimientosProgramados: string;
   lineas: LineaSolicitud[];
+  historial: CambioHistorial[];
 };
 
 export type EstadoLineaDistribucion =
@@ -77,6 +88,7 @@ export type LineaDistribucion = {
   proveedorNom: string;
   transportistaId: number;
   transportistaNom: string;
+  destino: string;
   dl: number;
   dt: number;
   dc: number;
@@ -86,8 +98,13 @@ export type LineaDistribucion = {
   dg: number;
   estado: EstadoLineaDistribucion;
   correoEnviadoEn: string | null;
+  correoTransportistaEnviadoEn?: string | null;
   confirmacionProveedor: EstadoConfirmacion;
   confirmacionTransportista: EstadoConfirmacion;
+  cantidadesProveedor?: Partial<Record<DiaKey, number>>;
+  comentarioProveedor?: string | null;
+  cantidadesTransportista?: Partial<Record<DiaKey, number>>;
+  comentarioTransportista?: string | null;
   motivoRechazoProveedor: string | null;
   motivoRechazoTransportista: string | null;
 };
@@ -116,6 +133,12 @@ export type EntradaReal = {
   obs: string;
 };
 
+export type Destino = {
+  id: number;
+  nom: string;
+  activo: boolean;
+};
+
 export type Material = {
   id: number;
   nom: string;
@@ -126,7 +149,8 @@ export type Proveedor = {
   id: number;
   nom: string;
   tipus: "proveedor" | "transportista" | "ambos";
-  email: string;
+  emails: string[];
+  bcc: string[];
   activo: boolean;
 };
 
@@ -136,6 +160,32 @@ export type Asignacion = {
   proveedorId: number;
   transportistaId: number;
   pct: number;
+};
+
+export type PlantillaDistribucion = {
+  id: number;
+  materialId: number;
+  materialNom: string;
+  destino: string;
+  activo: boolean;
+};
+
+export type HorarioLlegada = {
+  id: number;
+  solicitudId: number;
+  dia: DiaKey;
+  franja: string;
+  silo: "silo1" | "silo2";
+  materialNom: string;
+  creadoEn: string;
+};
+
+export type HorarioPlantillaSlot = {
+  id: number;
+  dia: DiaKey;
+  franja: string;
+  silo: "silo1" | "silo2";
+  materialNom: string;
 };
 
 // ---------------------------------------------------------------------------
@@ -148,51 +198,34 @@ export type CaState = {
   confirmaciones: Confirmacion[];
   entradasReales: EntradaReal[];
   materiales: Material[];
+  destinos: Destino[];
   proveedores: Proveedor[];
   asignaciones: Asignacion[];
+  plantillaDistribucion: PlantillaDistribucion[];
+  horarioLlegadas: HorarioLlegada[];
+  horarioPlantilla: HorarioPlantillaSlot[];
 };
 
 // ---------------------------------------------------------------------------
-// Estado inicial con datos de ejemplo
+// Estado vacío inicial (mientras carga desde la API)
 // ---------------------------------------------------------------------------
 
-const initialState: CaState = {
+const emptyState: CaState = {
   solicitudes: [],
   distribucion: [],
   confirmaciones: [],
   entradasReales: [],
-  materiales: [
-    { id: 1, nom: "Madera Fina",      activo: true },
-    { id: 2, nom: "CSR Fino",         activo: true },
-    { id: 3, nom: "CSR Grueso",       activo: true },
-    { id: 4, nom: "Biomasa Fina",     activo: true },
-    { id: 5, nom: "Biomasa Gruesa",   activo: true },
-    { id: 6, nom: "NFU",              activo: true },
-    { id: 7, nom: "Amoniaco",         activo: true },
-    { id: 8, nom: "Sulfato Ferroso",  activo: true },
-    { id: 9, nom: "Cáscaras Anacardo", activo: true },
-  ],
-  proveedores: [
-    { id: 1,  nom: "PRONATUR",   tipus: "proveedor",     email: "arnau.guitart@molins.es", activo: true },
-    { id: 2,  nom: "GRP",        tipus: "proveedor",     email: "arnau.guitart@molins.es", activo: true },
-    { id: 3,  nom: "PIRSA",      tipus: "proveedor",     email: "arnau.guitart@molins.es", activo: true },
-    { id: 4,  nom: "SEMESA",     tipus: "proveedor",     email: "arnau.guitart@molins.es", activo: true },
-    { id: 5,  nom: "XIRGU",      tipus: "proveedor",     email: "arnau.guitart@molins.es", activo: true },
-    { id: 6,  nom: "GESVAL",     tipus: "proveedor",     email: "arnau.guitart@molins.es", activo: true },
-    { id: 7,  nom: "FOMENT",     tipus: "transportista", email: "arnau.guitart@molins.es", activo: true },
-    { id: 8,  nom: "RUIZ MILÀ",  tipus: "transportista", email: "arnau.guitart@molins.es", activo: true },
-    { id: 9,  nom: "RUMO",       tipus: "transportista", email: "arnau.guitart@molins.es", activo: true },
-  ],
-  asignaciones: [
-    { id: 1, materialId: 3, proveedorId: 1, transportistaId: 7, pct: 70 },
-    { id: 2, materialId: 3, proveedorId: 1, transportistaId: 8, pct: 30 },
-    { id: 3, materialId: 1, proveedorId: 4, transportistaId: 7, pct: 50 },
-    { id: 4, materialId: 1, proveedorId: 5, transportistaId: 9, pct: 50 },
-  ],
+  materiales: [],
+  destinos: [],
+  proveedores: [],
+  asignaciones: [],
+  plantillaDistribucion: [],
+  horarioLlegadas: [],
+  horarioPlantilla: [],
 };
 
 // ---------------------------------------------------------------------------
-// Acciones
+// Acciones — se mantiene exactamente la misma forma para compatibilidad
 // ---------------------------------------------------------------------------
 
 export type CaAction =
@@ -203,266 +236,181 @@ export type CaAction =
   | { type: "INICIAR_DISTRIBUCION"; solicitudId: number }
   // Distribución
   | { type: "ADD_LINEA_DISTRIBUCION"; linea: Omit<LineaDistribucion, "id"> & { estado?: EstadoLineaDistribucion } }
+  | { type: "APLICAR_REPARTO_AUTOMATICO"; solicitudId: number; lineaSolicitudId: number }
   | { type: "UPDATE_LINEA_DISTRIBUCION"; lineaId: number; changes: Partial<LineaDistribucion> }
+  | { type: "ELIMINAR_LINEA_DISTRIBUCION"; lineaId: number }
   | { type: "ENVIAR_CORREO_LINEA"; lineaId: number }
   | { type: "ENVIAR_TODOS_CORREOS"; solicitudId: number }
   // Confirmaciones proveedor
-  | { type: "CONFIRMAR_LINEA_PROVEEDOR"; lineaId: number; proveedorId: number; comentario?: string | null }
+  | { type: "CONFIRMAR_LINEA_PROVEEDOR"; lineaId: number; proveedorId: number; comentario?: string | null; cantidades?: Partial<Record<DiaKey, number>> }
   | { type: "RECHAZAR_LINEA_PROVEEDOR"; lineaId: number; proveedorId: number; motivo: string }
+  // Confirmaciones transportista
+  | { type: "CONFIRMAR_LINEA_TRANSPORTISTA"; lineaId: number; transportistaId: number; comentario?: string | null; cantidades?: Partial<Record<DiaKey, number>> }
+  | { type: "RECHAZAR_LINEA_TRANSPORTISTA"; lineaId: number; transportistaId: number; motivo: string }
+  // Envío de correo a transportista
+  | { type: "ENVIAR_CORREO_TRANSPORTISTA"; lineaId: number }
   // Entradas reales
   | { type: "ADD_ENTRADA_REAL"; entrada: Omit<EntradaReal, "id"> }
+  // Maestros — destinos
+  | { type: "ADD_DESTINO"; nom: string }
+  | { type: "TOGGLE_DESTINO"; id: number }
   // Maestros
   | { type: "ADD_MATERIAL"; nom: string }
   | { type: "TOGGLE_MATERIAL"; id: number }
-  | { type: "ADD_PROVEEDOR"; nom: string; tipus: Proveedor["tipus"]; email: string }
+  | { type: "ADD_PROVEEDOR"; nom: string; tipus: Proveedor["tipus"]; emails: string[]; bcc: string[] }
+  | { type: "UPDATE_PROVEEDOR"; id: number; changes: Partial<Pick<Proveedor, "nom" | "tipus" | "emails" | "bcc">> }
   | { type: "TOGGLE_PROVEEDOR"; id: number }
   | { type: "ADD_ASIGNACION"; materialId: number; proveedorId: number; transportistaId: number; pct: number }
-  | { type: "DELETE_ASIGNACION"; id: number };
+  | { type: "DELETE_ASIGNACION"; id: number }
+  | { type: "ADD_PLANTILLA_ROW"; row: Omit<PlantillaDistribucion, "id"> }
+  | { type: "REMOVE_PLANTILLA_ROW"; id: number }
+  | { type: "CERRAR_PROGRAMACION"; solicitudId: number }
+  | {
+      type: "UPSERT_HORARIO_SLOT";
+      solicitudId: number;
+      dia: DiaKey;
+      franja: string;
+      silo: "silo1" | "silo2";
+      materialNom: string;
+    }
+  | { type: "DELETE_HORARIO_SLOT"; solicitudId: number; slotId: number }
+  | {
+      type: "UPSERT_HORARIO_PLANTILLA_SLOT";
+      dia: DiaKey;
+      franja: string;
+      silo: "silo1" | "silo2";
+      materialNom: string;
+    }
+  | { type: "DELETE_HORARIO_PLANTILLA_SLOT"; slotId: number }
+  | {
+      type: "EDITAR_SOLICITUD";
+      solicitudId: number;
+      lineas: Array<{
+        id: number;
+        dl: number; dt: number; dc: number; dj: number; dv: number; ds: number; dg: number;
+        destino?: string;
+      }>;
+      motivo: string;
+      comentarioGeneral?: string;
+      mantenimientosProgramados?: string;
+    }
+  | {
+      type: "REASIGNAR_LINEA_DISTRIBUCION";
+      solicitudId: number;
+      lineaId: number;
+      proveedorId?: number;
+      proveedorNom?: string;
+      transportistaId?: number;
+      transportistaNom?: string;
+      motivo: string;
+    };
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-
-function nextId(items: { id: number }[]): number {
-  return items.length === 0 ? 1 : Math.max(...items.map((i) => i.id)) + 1;
-}
 
 export function sumaViajes(l: Pick<LineaSolicitud, "dl" | "dt" | "dc" | "dj" | "dv" | "ds" | "dg">): number {
   return l.dl + l.dt + l.dc + l.dj + l.dv + l.ds + l.dg;
 }
 
 // ---------------------------------------------------------------------------
-// Reducer
+// Mapper: API response → CaState
 // ---------------------------------------------------------------------------
 
-function caInnerReducer(state: CaState, action: CaAction): CaState {
-  switch (action.type) {
-
-    case "GUARDAR_BORRADOR": {
-      const { id, ...rest } = action.solicitud;
-      // Si tiene id, actualiza; si no, crea nueva con estado borrador
-      if (id !== undefined) {
-        return {
-          ...state,
-          solicitudes: state.solicitudes.map((s) =>
-            s.id === id ? { ...s, ...rest } : s
-          ),
-        };
-      }
-      const nueva: Solicitud = {
-        id: nextId(state.solicitudes),
-        estado: "borrador",
-        ts: new Date().toISOString(),
-        ...rest,
-      };
-      return { ...state, solicitudes: [...state.solicitudes, nueva] };
-    }
-
-    case "ENVIAR_SOLICITUD":
-      return {
-        ...state,
-        solicitudes: state.solicitudes.map((s) =>
-          s.id === action.solicitudId ? { ...s, estado: "enviada" } : s
-        ),
-      };
-
-    case "GUARDAR_Y_ENVIAR": {
-      const { id, ...rest } = action.solicitud;
-      if (id !== undefined) {
-        // Actualiza la existente y la marca como enviada
-        return {
-          ...state,
-          solicitudes: state.solicitudes.map((s) =>
-            s.id === id ? { ...s, ...rest, estado: "enviada" as EstadoSolicitud } : s
-          ),
-        };
-      }
-      // Crea nueva directamente en estado enviada
-      const nueva: Solicitud = {
-        id: nextId(state.solicitudes),
-        estado: "enviada",
-        ts: new Date().toISOString(),
-        ...rest,
-      };
-      return { ...state, solicitudes: [...state.solicitudes, nueva] };
-    }
-
-    case "INICIAR_DISTRIBUCION":
-      return {
-        ...state,
-        solicitudes: state.solicitudes.map((s) =>
-          s.id === action.solicitudId ? { ...s, estado: "en_distribucion" } : s
-        ),
-      };
-
-    case "ADD_LINEA_DISTRIBUCION": {
-      const linea: LineaDistribucion = {
-        id: nextId(state.distribucion),
-        ...action.linea,
-        estado: action.linea.estado ?? "pendiente",
-      };
-      return { ...state, distribucion: [...state.distribucion, linea] };
-    }
-
-    case "UPDATE_LINEA_DISTRIBUCION":
-      return {
-        ...state,
-        distribucion: state.distribucion.map((l) =>
-          l.id === action.lineaId ? { ...l, ...action.changes } : l
-        ),
-      };
-
-    case "ENVIAR_CORREO_LINEA":
-      return {
-        ...state,
-        distribucion: state.distribucion.map((l) =>
-          l.id === action.lineaId
-            ? { ...l, estado: "enviada" as const, correoEnviadoEn: new Date().toISOString() }
-            : l
-        ),
-      };
-
-    case "ENVIAR_TODOS_CORREOS":
-      return {
-        ...state,
-        distribucion: state.distribucion.map((l) =>
-          l.solicitudId === action.solicitudId
-            ? { ...l, estado: "enviada" as const, correoEnviadoEn: new Date().toISOString() }
-            : l
-        ),
-      };
-
-    case "CONFIRMAR_LINEA_PROVEEDOR": {
-      const conf: Confirmacion = {
-        id: nextId(state.confirmaciones),
-        lineaDistribucionId: action.lineaId,
-        parte: "proveedor",
-        estado: "confirmada",
-        motivo: action.comentario ?? null,
-        ts: new Date().toISOString(),
-      };
-      const nuevaDistribucion = state.distribucion.map((l) =>
-        l.id === action.lineaId
-          ? {
-              ...l,
-              confirmacionProveedor: "confirmada" as EstadoConfirmacion,
-              confirmacionTransportista: "confirmada" as EstadoConfirmacion,
-            }
-          : l
-      );
-      // Buscar la solicitud afectada y comprobar si todas sus líneas están confirmadas
-      const lineaConfirmada = nuevaDistribucion.find((l) => l.id === action.lineaId);
-      const solicitudId = lineaConfirmada?.solicitudId;
-      const todasConfirmadas =
-        solicitudId !== undefined &&
-        nuevaDistribucion
-          .filter((l) => l.solicitudId === solicitudId)
-          .every((l) => l.confirmacionProveedor === "confirmada");
-      return {
-        ...state,
-        distribucion: nuevaDistribucion,
-        confirmaciones: [...state.confirmaciones, conf],
-        solicitudes: todasConfirmadas
-          ? state.solicitudes.map((s) =>
-              s.id === solicitudId ? { ...s, estado: "confirmada" as const } : s
-            )
-          : state.solicitudes,
-      };
-    }
-
-    case "RECHAZAR_LINEA_PROVEEDOR": {
-      const conf: Confirmacion = {
-        id: nextId(state.confirmaciones),
-        lineaDistribucionId: action.lineaId,
-        parte: "proveedor",
-        estado: "rechazada",
-        motivo: action.motivo,
-        ts: new Date().toISOString(),
-      };
-      return {
-        ...state,
-        distribucion: state.distribucion.map((l) =>
-          l.id === action.lineaId
-            ? {
-                ...l,
-                confirmacionProveedor: "rechazada" as EstadoConfirmacion,
-                motivoRechazoProveedor: action.motivo,
-              }
-            : l
-        ),
-        confirmaciones: [...state.confirmaciones, conf],
-      };
-    }
-
-    case "ADD_ENTRADA_REAL": {
-      const entrada: EntradaReal = {
-        id: nextId(state.entradasReales),
-        ...action.entrada,
-      };
-      return { ...state, entradasReales: [...state.entradasReales, entrada] };
-    }
-
-    case "ADD_MATERIAL": {
-      const mat: Material = {
-        id: nextId(state.materiales),
-        nom: action.nom,
-        activo: true,
-      };
-      return { ...state, materiales: [...state.materiales, mat] };
-    }
-
-    case "TOGGLE_MATERIAL":
-      return {
-        ...state,
-        materiales: state.materiales.map((m) =>
-          m.id === action.id ? { ...m, activo: !m.activo } : m
-        ),
-      };
-
-    case "ADD_PROVEEDOR": {
-      const prov: Proveedor = {
-        id: nextId(state.proveedores),
-        nom: action.nom,
-        tipus: action.tipus,
-        email: action.email,
-        activo: true,
-      };
-      return { ...state, proveedores: [...state.proveedores, prov] };
-    }
-
-    case "TOGGLE_PROVEEDOR":
-      return {
-        ...state,
-        proveedores: state.proveedores.map((p) =>
-          p.id === action.id ? { ...p, activo: !p.activo } : p
-        ),
-      };
-
-    case "ADD_ASIGNACION": {
-      const asig: Asignacion = {
-        id: nextId(state.asignaciones),
-        materialId: action.materialId,
-        proveedorId: action.proveedorId,
-        transportistaId: action.transportistaId,
-        pct: action.pct,
-      };
-      return { ...state, asignaciones: [...state.asignaciones, asig] };
-    }
-
-    case "DELETE_ASIGNACION":
-      return {
-        ...state,
-        asignaciones: state.asignaciones.filter((a) => a.id !== action.id),
-      };
-
-    default:
-      return state;
-  }
-}
-
-function caReducer(state: CaState, action: CaAction | { type: "__SYNC__"; state: CaState }): CaState {
-  if (action.type === "__SYNC__") return (action as { type: "__SYNC__"; state: CaState }).state;
-  return caInnerReducer(state, action as CaAction);
+function mapEstadoToState(api: EstadoCompleto): CaState {
+  return {
+    solicitudes: api.solicitudes.map((s) => ({
+      id: s.id,
+      semana: s.semana,
+      ini: s.ini,
+      fi: s.fi,
+      creadaPor: s.creadaPor,
+      estado: s.estado,
+      comentarioGeneral: s.comentarioGeneral,
+      mantenimientosProgramados: s.mantenimientosProgramados ?? "",
+      ts: s.ts,
+      lineas: s.lineas.map((l): LineaSolicitud => ({
+        id: l.id,
+        materialId: l.materialId,
+        materialNom: l.materialNom,
+        dl: l.dl,
+        dt: l.dt,
+        dc: l.dc,
+        dj: l.dj,
+        dv: l.dv,
+        ds: l.ds,
+        dg: l.dg,
+        destino: typeof l.destino === "string" ? l.destino : "",
+        obs: l.obs,
+      })),
+      historial: s.historial.map((h) => ({
+        id: h.id,
+        ts: h.ts,
+        autor: h.autor,
+        motivo: h.motivo,
+        descripcion: h.descripcion,
+      })),
+    })),
+    distribucion: api.distribucion.map((l) => ({
+      id: l.id,
+      solicitudId: l.solicitudId,
+      lineaSolicitudId: l.lineaSolicitudId,
+      materialId: l.materialId,
+      materialNom: l.materialNom,
+      proveedorId: l.proveedorId,
+      proveedorNom: l.proveedorNom,
+      transportistaId: l.transportistaId,
+      transportistaNom: l.transportistaNom,
+      destino: l.destino,
+      dl: l.dl,
+      dt: l.dt,
+      dc: l.dc,
+      dj: l.dj,
+      dv: l.dv,
+      ds: l.ds,
+      dg: l.dg,
+      estado: l.estado,
+      correoEnviadoEn: l.correoEnviadoEn,
+      correoTransportistaEnviadoEn: l.correoTransportistaEnviadoEn ?? null,
+      confirmacionProveedor: l.confirmacionProveedor,
+      confirmacionTransportista: l.confirmacionTransportista,
+      cantidadesProveedor: l.cantidadesProveedor ?? undefined,
+      comentarioProveedor: l.comentarioProveedor,
+      cantidadesTransportista: l.cantidadesTransportista ?? undefined,
+      comentarioTransportista: l.comentarioTransportista,
+      motivoRechazoProveedor: l.motivoRechazoProveedor,
+      motivoRechazoTransportista: l.motivoRechazoTransportista,
+    })),
+    confirmaciones: api.confirmaciones,
+    entradasReales: api.entradasReales,
+    materiales: api.materiales,
+    destinos: api.destinos,
+    proveedores: api.proveedores,
+    asignaciones: api.asignaciones,
+    plantillaDistribucion: api.plantillaDistribucion.map((p) => ({
+      id: p.id,
+      materialId: p.materialId,
+      materialNom: p.materialNom,
+      destino: p.destino,
+      activo: p.activo,
+    })),
+    horarioLlegadas: api.horarioLlegadas.map((h) => ({
+      id: h.id,
+      solicitudId: h.solicitudId,
+      dia: h.dia,
+      franja: h.franja,
+      silo: h.silo,
+      materialNom: h.materialNom,
+      creadoEn: h.creadoEn,
+    })),
+    horarioPlantilla: api.horarioPlantilla.map((h) => ({
+      id: h.id,
+      dia: h.dia,
+      franja: h.franja,
+      silo: h.silo,
+      materialNom: h.materialNom,
+    })),
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -471,52 +419,392 @@ function caReducer(state: CaState, action: CaAction | { type: "__SYNC__"; state:
 
 type CaStoreContextValue = {
   state: CaState;
-  dispatch: Dispatch<CaAction>;
+  dispatch: (action: CaAction) => void;
+  loading: boolean;
+  error: string | null;
 };
 
 const CaStoreContext = createContext<CaStoreContextValue | null>(null);
 
-function loadFromStorage(): CaState {
-  try {
-    const raw = localStorage.getItem(LS_KEY);
-    if (!raw) return initialState;
-    return { ...initialState, ...(JSON.parse(raw) as Partial<CaState>) };
-  } catch {
-    return initialState;
-  }
-}
-
-function saveToStorage(state: CaState): void {
-  try {
-    localStorage.setItem(LS_KEY, JSON.stringify(state));
-  } catch { /* cuota excedida, ignorar */ }
-}
+// ---------------------------------------------------------------------------
+// Provider
+// ---------------------------------------------------------------------------
 
 export function CaStoreProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(caReducer, undefined, loadFromStorage);
-  const isFirstRender = useRef(true);
+  const [state, setState] = useState<CaState>(emptyState);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const stateRef = useRef(state);
+  stateRef.current = state;
 
-  // Persiste en localStorage cada vez que el estado cambia
-  useEffect(() => {
-    if (isFirstRender.current) { isFirstRender.current = false; return; }
-    saveToStorage(state);
-  }, [state]);
-
-  // Sincroniza entre pestañas cuando otra pestaña modifica el store
-  useEffect(() => {
-    const handler = (e: StorageEvent) => {
-      if (e.key !== LS_KEY || e.newValue === null) return;
-      try {
-        const next = JSON.parse(e.newValue) as CaState;
-        dispatch({ type: "__SYNC__", state: next } as unknown as CaAction & { type: "__SYNC__"; state: CaState });
-      } catch { /* ignorar */ }
-    };
-    window.addEventListener("storage", handler);
-    return () => window.removeEventListener("storage", handler);
+  // Carga el estado completo desde la API
+  const fetchState = useCallback(async () => {
+    try {
+      const data = await combustiblesService.getState();
+      setState(mapEstadoToState(data));
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error cargando datos");
+    }
   }, []);
 
+  // Carga inicial
+  useEffect(() => {
+    setLoading(true);
+    void fetchState().finally(() => setLoading(false));
+  }, [fetchState]);
+
+  // SSE: re-fetch cuando el servidor notifica un cambio
+  useEffect(() => {
+    const es = new EventSource("/api/combustibles/events");
+
+    es.addEventListener("update", () => {
+      void fetchState();
+    });
+
+    es.onerror = () => {
+      // El EventSource reintenta automáticamente; no hacemos nada
+    };
+
+    return () => {
+      es.close();
+    };
+  }, [fetchState]);
+
+  // dispatch: traduce cada acción en la llamada HTTP correspondiente
+  // y hace re-fetch tras la respuesta (el SSE también lo dispara, pero
+  // hacer re-fetch aquí da feedback inmediato en la misma pestaña)
+  const dispatch = useCallback(
+    (action: CaAction) => {
+      void (async () => {
+        try {
+          switch (action.type) {
+            // Solicitudes
+            case "GUARDAR_BORRADOR": {
+              const { id, semana, ini, fi, creadaPor, comentarioGeneral, mantenimientosProgramados, lineas } = action.solicitud;
+              await combustiblesService.guardarBorrador({
+                id,
+                semana,
+                ini,
+                fi,
+                creadaPor,
+                comentarioGeneral,
+                mantenimientosProgramados,
+                lineas: lineas.map((l) => ({
+                  id: l.id > 0 ? l.id : undefined,
+                  materialId: l.materialId,
+                  materialNom: l.materialNom,
+                  dl: l.dl,
+                  dt: l.dt,
+                  dc: l.dc,
+                  dj: l.dj,
+                  dv: l.dv,
+                  ds: l.ds,
+                  dg: l.dg,
+                  destino: l.destino,
+                  obs: l.obs,
+                })),
+              });
+              break;
+            }
+            case "GUARDAR_Y_ENVIAR": {
+              const { id, semana, ini, fi, creadaPor, comentarioGeneral, mantenimientosProgramados, lineas } = action.solicitud;
+              await combustiblesService.enviarSolicitud({
+                id,
+                semana,
+                ini,
+                fi,
+                creadaPor,
+                comentarioGeneral,
+                mantenimientosProgramados,
+                lineas: lineas.map((l) => ({
+                  id: l.id > 0 ? l.id : undefined,
+                  materialId: l.materialId,
+                  materialNom: l.materialNom,
+                  dl: l.dl,
+                  dt: l.dt,
+                  dc: l.dc,
+                  dj: l.dj,
+                  dv: l.dv,
+                  ds: l.ds,
+                  dg: l.dg,
+                  destino: l.destino,
+                  obs: l.obs,
+                })),
+              });
+              break;
+            }
+            case "ENVIAR_SOLICITUD": {
+              // Enviar una solicitud existente (solo cambio de estado)
+              // Buscamos los datos de la solicitud actual para reenviar
+              const sol = stateRef.current.solicitudes.find((s) => s.id === action.solicitudId);
+              if (sol) {
+                await combustiblesService.enviarSolicitud({
+                  id: sol.id,
+                  semana: sol.semana,
+                  ini: sol.ini,
+                  fi: sol.fi,
+                  creadaPor: sol.creadaPor,
+                  comentarioGeneral: sol.comentarioGeneral,
+                  mantenimientosProgramados: sol.mantenimientosProgramados,
+                  lineas: sol.lineas.map((l) => ({
+                    id: l.id,
+                    materialId: l.materialId,
+                    materialNom: l.materialNom,
+                    dl: l.dl,
+                    dt: l.dt,
+                    dc: l.dc,
+                    dj: l.dj,
+                    dv: l.dv,
+                    ds: l.ds,
+                    dg: l.dg,
+                    destino: l.destino,
+                    obs: l.obs,
+                  })),
+                });
+              }
+              break;
+            }
+            case "INICIAR_DISTRIBUCION":
+              await combustiblesService.iniciarDistribucion(action.solicitudId);
+              break;
+
+            case "CERRAR_PROGRAMACION":
+              await combustiblesService.cerrarProgramacion(action.solicitudId);
+              break;
+
+            case "EDITAR_SOLICITUD":
+              await combustiblesService.editarSolicitud(action.solicitudId, {
+                lineas: action.lineas,
+                motivo: action.motivo,
+                ...(action.comentarioGeneral !== undefined && { comentarioGeneral: action.comentarioGeneral }),
+                ...(action.mantenimientosProgramados !== undefined && { mantenimientosProgramados: action.mantenimientosProgramados }),
+              });
+              break;
+
+            // Distribución
+            case "ADD_LINEA_DISTRIBUCION": {
+              const { linea } = action;
+              await combustiblesService.crearLineaDistribucion(
+                linea.solicitudId,
+                linea.lineaSolicitudId,
+                {
+                  proveedorId: linea.proveedorId,
+                  proveedorNom: linea.proveedorNom,
+                  transportistaId: linea.transportistaId,
+                  transportistaNom: linea.transportistaNom,
+                  destino: linea.destino,
+                  dl: linea.dl,
+                  dt: linea.dt,
+                  dc: linea.dc,
+                  dj: linea.dj,
+                  dv: linea.dv,
+                  ds: linea.ds,
+                  dg: linea.dg,
+                }
+              );
+              break;
+            }
+
+            case "APLICAR_REPARTO_AUTOMATICO":
+              await combustiblesService.aplicarRepartoAutomatico(
+                action.solicitudId,
+                action.lineaSolicitudId
+              );
+              break;
+
+            case "UPDATE_LINEA_DISTRIBUCION": {
+              const { lineaId, changes } = action;
+              await combustiblesService.updateLineaDistribucion(lineaId, {
+                proveedorId: changes.proveedorId,
+                proveedorNom: changes.proveedorNom,
+                transportistaId: changes.transportistaId,
+                transportistaNom: changes.transportistaNom,
+                destino: changes.destino,
+                dl: changes.dl,
+                dt: changes.dt,
+                dc: changes.dc,
+                dj: changes.dj,
+                dv: changes.dv,
+                ds: changes.ds,
+                dg: changes.dg,
+              });
+              break;
+            }
+
+            case "ELIMINAR_LINEA_DISTRIBUCION":
+              await combustiblesService.eliminarLineaDistribucion(action.lineaId);
+              break;
+
+            case "ENVIAR_CORREO_LINEA":
+              await combustiblesService.enviarCorreoLinea(action.lineaId);
+              break;
+
+            case "ENVIAR_CORREO_TRANSPORTISTA":
+              await combustiblesService.enviarCorreoTransportistaLinea(action.lineaId);
+              break;
+
+            case "ENVIAR_TODOS_CORREOS": {
+              // Enviar correo a todas las líneas de una solicitud
+              const lineas = stateRef.current.distribucion.filter(
+                (l) => l.solicitudId === action.solicitudId
+              );
+              await Promise.all(lineas.map((l) => combustiblesService.enviarCorreoLinea(l.id)));
+              break;
+            }
+
+            case "CONFIRMAR_LINEA_PROVEEDOR":
+              await combustiblesService.confirmarLineaProveedor(action.lineaId, {
+                comentario: action.comentario,
+                cantidades: action.cantidades,
+              });
+              break;
+
+            case "RECHAZAR_LINEA_PROVEEDOR":
+              await combustiblesService.rechazarLineaProveedor(action.lineaId, action.motivo);
+              break;
+
+            case "CONFIRMAR_LINEA_TRANSPORTISTA":
+              await combustiblesService.confirmarLineaTransportista(action.lineaId, {
+                comentario: action.comentario,
+                cantidades: action.cantidades,
+              });
+              break;
+
+            case "RECHAZAR_LINEA_TRANSPORTISTA":
+              await combustiblesService.rechazarLineaTransportista(action.lineaId, action.motivo);
+              break;
+
+            case "REASIGNAR_LINEA_DISTRIBUCION":
+              await combustiblesService.reasignarLinea(action.lineaId, {
+                solicitudId: action.solicitudId,
+                proveedorId: action.proveedorId,
+                proveedorNom: action.proveedorNom,
+                transportistaId: action.transportistaId,
+                transportistaNom: action.transportistaNom,
+                motivo: action.motivo,
+              });
+              break;
+
+            // Maestros — destinos
+            case "ADD_DESTINO":
+              await combustiblesService.addDestino(action.nom);
+              break;
+
+            case "TOGGLE_DESTINO":
+              await combustiblesService.toggleDestino(action.id);
+              break;
+
+            // Maestros — materiales
+            case "ADD_MATERIAL":
+              await combustiblesService.addMaterial(action.nom);
+              break;
+
+            case "TOGGLE_MATERIAL":
+              await combustiblesService.toggleMaterial(action.id);
+              break;
+
+            // Maestros — proveedores
+            case "ADD_PROVEEDOR":
+              await combustiblesService.addProveedor({
+                nom: action.nom,
+                tipus: action.tipus,
+                emails: action.emails,
+                bcc: action.bcc,
+              });
+              break;
+
+            case "UPDATE_PROVEEDOR":
+              await combustiblesService.updateProveedor(action.id, action.changes);
+              break;
+
+            case "TOGGLE_PROVEEDOR":
+              await combustiblesService.toggleProveedor(action.id);
+              break;
+
+            // Maestros — asignaciones
+            case "ADD_ASIGNACION":
+              await combustiblesService.addAsignacion({
+                materialId: action.materialId,
+                proveedorId: action.proveedorId,
+                transportistaId: action.transportistaId,
+                pct: action.pct,
+              });
+              break;
+
+            case "DELETE_ASIGNACION":
+              await combustiblesService.deleteAsignacion(action.id);
+              break;
+
+            // Plantilla de distribución — gestionada por usePlantillaDistribucion hook
+            case "ADD_PLANTILLA_ROW":
+            case "REMOVE_PLANTILLA_ROW":
+              // La plantilla tiene su propio hook (use-plantilla-distribucion)
+              // que gestiona las operaciones directamente. Estos cases son no-op aquí.
+              break;
+
+            // Entradas reales
+            case "ADD_ENTRADA_REAL":
+              await combustiblesService.addEntradaReal({
+                solicitudId: action.entrada.solicitudId,
+                fecha: action.entrada.fecha,
+                materialId: action.entrada.materialId,
+                materialNom: action.entrada.materialNom,
+                proveedorId: action.entrada.proveedorId,
+                proveedorNom: action.entrada.proveedorNom,
+                transportistaId: action.entrada.transportistaId,
+                transportistaNom: action.entrada.transportistaNom,
+                viajes: action.entrada.viajes,
+                destino: action.entrada.destino,
+                obs: action.entrada.obs,
+              });
+              break;
+
+            // Horario de llegadas
+            case "UPSERT_HORARIO_SLOT":
+              await combustiblesService.upsertHorarioSlot({
+                solicitudId: action.solicitudId,
+                dia: action.dia,
+                franja: action.franja,
+                silo: action.silo,
+                materialNom: action.materialNom,
+              });
+              break;
+
+            case "DELETE_HORARIO_SLOT":
+              await combustiblesService.deleteHorarioSlot(action.solicitudId, action.slotId);
+              break;
+
+            case "UPSERT_HORARIO_PLANTILLA_SLOT":
+              await combustiblesService.upsertHorarioPlantillaSlot({
+                dia: action.dia,
+                franja: action.franja,
+                silo: action.silo,
+                materialNom: action.materialNom,
+              });
+              break;
+
+            case "DELETE_HORARIO_PLANTILLA_SLOT":
+              await combustiblesService.deleteHorarioPlantillaSlot(action.slotId);
+              break;
+
+            default:
+              break;
+          }
+          // Tras cualquier mutación, re-fetch el estado completo
+          await fetchState();
+        } catch (err) {
+          console.error("[CaStore] dispatch error:", err);
+          // Re-lanza para que las páginas puedan mostrar el error si hacen try/catch
+          throw err;
+        }
+      })();
+    },
+    [fetchState]
+  );
+
   return (
-    <CaStoreContext.Provider value={{ state, dispatch }}>
+    <CaStoreContext.Provider value={{ state, dispatch, loading, error }}>
       {children}
     </CaStoreContext.Provider>
   );
@@ -530,3 +818,22 @@ export function useCaStore(): CaStoreContextValue {
   return ctx;
 }
 
+export function labelEstadoSolicitud(estado: EstadoSolicitud): string {
+  switch (estado) {
+    case "borrador": return "Borrador";
+    case "enviada": return "Enviado a Compras";
+    case "en_distribucion": return "En distribución";
+    case "confirmada": return "Confirmado";
+    case "cerrada": return "Cerrado";
+    default: return estado;
+  }
+}
+
+export function labelConfirmacion(estado: "pendiente" | "confirmada" | "rechazada"): string {
+  switch (estado) {
+    case "pendiente": return "Pendiente";
+    case "confirmada": return "Confirmado";
+    case "rechazada": return "Rechazado";
+    default: return estado;
+  }
+}

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Home, Info, Shield, Users, KeyRound, Flame, LayoutDashboard, ClipboardList, Truck, CheckSquare, Activity, Settings } from "lucide-react";
+import { Home, Info, Shield, Users, KeyRound, Flame, LayoutDashboard, ClipboardList, Truck, CheckSquare, Activity, Settings, CalendarDays, FolderKanban, Bell } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { LanguageSwitcher } from "./LanguageSwitcher.js";
 
@@ -12,8 +12,10 @@ type SidebarProps = {
 export function Sidebar({ open, onNavigate }: SidebarProps) {
   const { t } = useTranslation("common");
   const { t: tComb } = useTranslation("combustibles");
+  const { t: tJornada } = useTranslation("gestion-jornada");
   const [adminOpen, setAdminOpen] = useState(true);
   const [combustiblesOpen, setCombustiblesOpen] = useState(false);
+  const [jornadaOpen, setJornadaOpen] = useState(false);
   const panelRef = useRef<HTMLElement | null>(null);
 
   // Auto-expand groups based on current path
@@ -24,6 +26,9 @@ export function Sidebar({ open, onNavigate }: SidebarProps) {
       }
       if (window.location.pathname.startsWith("/combustibles")) {
         setCombustiblesOpen(true);
+      }
+      if (window.location.pathname.startsWith("/jornada")) {
+        setJornadaOpen(true);
       }
     }
   }, []);
@@ -95,6 +100,47 @@ export function Sidebar({ open, onNavigate }: SidebarProps) {
                   >
                     <KeyRound size={20} aria-hidden="true" />
                     <span>{t("nav.roles")}</span>
+                  </NavLink>
+                </li>
+              </ul>
+            )}
+          </li>
+
+          <li>
+            <button
+              type="button"
+              className="sidebar__group-toggle"
+              aria-expanded={jornadaOpen}
+              aria-controls="sidebar-jornada-submenu"
+              onClick={() => setJornadaOpen((v) => !v)}
+            >
+              <CalendarDays size={20} aria-hidden="true" />
+              <span>{tJornada("nav.module")}</span>
+              <span
+                className={jornadaOpen ? "sidebar__chevron sidebar__chevron--open" : "sidebar__chevron"}
+                aria-hidden="true"
+              >
+                ▸
+              </span>
+            </button>
+            {jornadaOpen && (
+              <ul id="sidebar-jornada-submenu" className="sidebar__sublist">
+                <li>
+                  <NavLink to="/jornada" end className={navLinkClass} onClick={onNavigate}>
+                    <CalendarDays size={16} aria-hidden="true" />
+                    <span>{tJornada("nav.today")}</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/jornada/proyectos" className={navLinkClass} onClick={onNavigate}>
+                    <FolderKanban size={16} aria-hidden="true" />
+                    <span>{tJornada("nav.projects")}</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/jornada/notificaciones" className={navLinkClass} onClick={onNavigate}>
+                    <Bell size={16} aria-hidden="true" />
+                    <span>{tJornada("nav.notifications")}</span>
                   </NavLink>
                 </li>
               </ul>

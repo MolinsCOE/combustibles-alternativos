@@ -11,6 +11,14 @@ import {
   UsersListPage
 } from "./features/users/index.js";
 import {
+  DailyPage,
+  ProjectsPage,
+  ProjectDetailPage,
+  TaskDetailPage,
+  NotificationsPage,
+  GestionJornadaProvider
+} from "./features/gestion-jornada/index.js";
+import {
   DashboardPage,
   SolicitudPage,
   DistribucionPage,
@@ -163,15 +171,22 @@ function AppRoutes() {
 
   return (
     <AppLayout>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/administracion/usuarios" element={<UsersListPage />} />
-        <Route path="/administracion/usuarios/:id" element={<UserDetailPage />} />
-        <Route path="/administracion/roles" element={<RolesListPage />} />
-        <Route path="/administracion/roles/:id" element={<RoleDetailPage />} />
-        <Route path="/informacion" element={<AboutPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <GestionJornadaProvider>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/administracion/usuarios" element={<UsersListPage />} />
+          <Route path="/administracion/usuarios/:id" element={<UserDetailPage />} />
+          <Route path="/administracion/roles" element={<RolesListPage />} />
+          <Route path="/administracion/roles/:id" element={<RoleDetailPage />} />
+          <Route path="/informacion" element={<AboutPage />} />
+          <Route path="/jornada" element={<DailyPage />} />
+          <Route path="/jornada/proyectos" element={<ProjectsPage />} />
+          <Route path="/jornada/proyectos/:id" element={<ProjectDetailPage />} />
+          <Route path="/jornada/tareas/:id" element={<TaskDetailPage />} />
+          <Route path="/jornada/notificaciones" element={<NotificationsPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </GestionJornadaProvider>
     </AppLayout>
   );
 }

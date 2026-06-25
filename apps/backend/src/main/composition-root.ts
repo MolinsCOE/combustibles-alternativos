@@ -6,12 +6,16 @@ import {
   buildUsuariosRolesModule,
   type UsuariosRolesModule
 } from "../modules/usuarios-roles/index.js";
-import { combustiblesEmailRouter } from "../modules/combustibles/index.js";
+import {
+  buildCombustiblesModule,
+  type CombustiblesModule
+} from "../modules/combustibles/index.js";
 
 export type ComposedApp = {
   app: ReturnType<typeof buildApp>;
   db: Db;
   usuariosRoles: UsuariosRolesModule;
+  combustibles: CombustiblesModule;
 };
 
 /**
@@ -27,11 +31,12 @@ export function composeApp(env: Env, deps: { db?: Db } = {}): ComposedApp {
 
   const healthRouter = buildHealthModule();
   const usuariosRoles = buildUsuariosRolesModule(db);
+  const combustibles = buildCombustiblesModule(db, env);
 
   const app = buildApp({
     env,
-    routers: [healthRouter, usuariosRoles.router, combustiblesEmailRouter]
+    routers: [healthRouter, usuariosRoles.router, combustibles.router]
   });
 
-  return { app, db, usuariosRoles };
+  return { app, db, usuariosRoles, combustibles };
 }

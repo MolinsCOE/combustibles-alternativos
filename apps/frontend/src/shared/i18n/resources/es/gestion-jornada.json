@@ -1,0 +1,182 @@
+{
+  "nav": {
+    "module": "Gestión de Jornada",
+    "today": "Hoy",
+    "projects": "Proyectos",
+    "tasks": "Tareas",
+    "notifications": "Notificaciones",
+    "weeklySnapshot": "Informe Semanal"
+  },
+  "projects": {
+    "title": "Proyectos",
+    "new": "Nuevo proyecto",
+    "empty": "No hay proyectos creados todavía.",
+    "emptyHint": "Crea tu primer proyecto para empezar a registrar tareas.",
+    "status": {
+      "open": "Abierto",
+      "closed": "Cerrado"
+    },
+    "fields": {
+      "name": "Nombre",
+      "namePlaceholder": "Nombre del proyecto",
+      "description": "Descripción",
+      "descriptionPlaceholder": "Descripción del proyecto (opcional)",
+      "status": "Estado",
+      "openedAt": "Creado el",
+      "closedAt": "Cerrado el"
+    },
+    "actions": {
+      "close": "Cerrar proyecto",
+      "reopen": "Reabrir proyecto",
+      "closeConfirm": "¿Cerrar el proyecto «{{name}}»? Las tareas asociadas quedarán archivadas pero se conservarán en el historial.",
+      "reopenConfirm": "¿Reabrir el proyecto «{{name}}»?",
+      "edit": "Editar proyecto",
+      "viewTasks": "Ver tareas"
+    },
+    "detail": {
+      "tasks": "Tareas del proyecto",
+      "noTasks": "Este proyecto no tiene tareas todavía."
+    },
+    "form": {
+      "createTitle": "Nuevo proyecto",
+      "editTitle": "Editar proyecto",
+      "save": "Guardar proyecto",
+      "errors": {
+        "nameRequired": "El nombre es obligatorio."
+      }
+    }
+  },
+  "tasks": {
+    "title": "Tareas",
+    "new": "Nueva tarea",
+    "empty": "No hay tareas para este día.",
+    "emptyHint": "Añade tu primera tarea del día.",
+    "status": {
+      "pending": "Pendiente",
+      "in_progress": "En curso",
+      "completed": "Completada",
+      "blocked": "Bloqueada"
+    },
+    "priority": {
+      "high": "Alta",
+      "medium": "Normal",
+      "low": "Baja"
+    },
+    "fields": {
+      "title": "Título",
+      "titlePlaceholder": "¿Qué has hecho?",
+      "description": "Descripción",
+      "descriptionPlaceholder": "Descripción detallada (opcional)",
+      "project": "Proyecto",
+      "projectPlaceholder": "Selecciona un proyecto",
+      "date": "Fecha",
+      "timeSpent": "Tiempo dedicado",
+      "timeSpentPlaceholder": "minutos",
+      "priority": "Prioridad",
+      "status": "Estado",
+      "dueDate": "Fecha límite",
+      "closedAt": "Cerrada el"
+    },
+    "form": {
+      "createTitle": "Nueva tarea",
+      "editTitle": "Editar tarea",
+      "save": "Guardar tarea",
+      "errors": {
+        "titleRequired": "El título es obligatorio.",
+        "projectRequired": "Debes seleccionar un proyecto."
+      }
+    },
+    "actions": {
+      "complete": "Marcar como completada",
+      "reopen": "Reabrir tarea",
+      "block": "Marcar como bloqueada",
+      "edit": "Editar",
+      "addSubtask": "Añadir subtarea",
+      "addAttachment": "Adjuntar fichero"
+    },
+    "timeDisplay": {
+      "hours": "{{h}}h {{m}}min",
+      "minutes": "{{m}}min"
+    }
+  },
+  "subtasks": {
+    "title": "Subtareas",
+    "new": "Nueva subtarea",
+    "empty": "No hay subtareas.",
+    "status": {
+      "pending": "Pendiente",
+      "completed": "Completada"
+    },
+    "fields": {
+      "title": "Título",
+      "titlePlaceholder": "Título de la subtarea",
+      "priority": "Prioridad",
+      "dueDate": "Fecha límite"
+    },
+    "form": {
+      "createTitle": "Nueva subtarea",
+      "save": "Añadir subtarea",
+      "errors": {
+        "titleRequired": "El título es obligatorio."
+      }
+    },
+    "actions": {
+      "complete": "Completar",
+      "reopen": "Reabrir"
+    }
+  },
+  "attachments": {
+    "title": "Adjuntos",
+    "add": "Adjuntar fichero",
+    "empty": "No hay ficheros adjuntos.",
+    "fileType": {
+      "pdf": "PDF",
+      "image": "Imagen",
+      "excel": "Excel",
+      "email": "Correo",
+      "other": "Otro"
+    },
+    "actions": {
+      "view": "Ver",
+      "download": "Abrir",
+      "delete": "Eliminar",
+      "deleteConfirm": "¿Eliminar el adjunto «{{name}}»? El registro quedará en el historial."
+    },
+    "externalHint": "Este tipo de fichero se abre con la aplicación del sistema."
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "empty": "No hay notificaciones.",
+    "markRead": "Marcar como leída",
+    "markAllRead": "Marcar todas como leídas",
+    "dueDate": {
+      "task": "La tarea «{{title}}» vence mañana.",
+      "subtask": "La subtarea «{{title}}» vence mañana."
+    }
+  },
+  "daily": {
+    "title": "Hoy — {{date}}",
+    "week": "Esta semana",
+    "noTasksToday": "No has registrado tareas hoy.",
+    "totalTime": "Tiempo total: {{time}}",
+    "navigate": {
+      "prev": "Mes anterior",
+      "next": "Mes siguiente",
+      "today": "Hoy"
+    }
+  },
+  "board": {
+    "title": "Tablero de tareas",
+    "empty": "Sin tareas"
+  },
+  "gantt": {
+    "title": "Vista Gantt",
+    "taskColumn": "Tarea",
+    "today": "Hoy"
+  },
+  "views": {
+    "list": "Lista",
+    "board": "Tablero",
+    "gantt": "Gantt"
+  }
+}

@@ -4,7 +4,7 @@
     "dashboard": "Dashboard",
     "solicitud": "Production Request",
     "distribucion": "Distribution",
-    "confirmacion": "Confirmation",
+    "confirmacion": "Supplier & carrier confirmation",
     "seguimiento": "Tracking",
     "maestros": "Masters"
   },
@@ -104,8 +104,84 @@
       "enviado": "Request sent to Purchasing"
     },
     "confirm": {
-      "enviar": "Send the request to Purchasing? Once sent, you will not be able to edit it while Purchasing is distributing.",
+      "enviar": "Send the request to Purchasing? Once sent, you can still edit the quantities if needed.",
       "enviarTitle": "Confirm submission"
+    },
+    "grupos": {
+      "añadirDestino": "+ Add destination",
+      "añadirMaterial": "+ Add material",
+      "eliminarDestino": "Remove destination",
+      "eliminarMaterial": "Remove material",
+      "destinoPlaceholder": "— Select destination —",
+      "materialPlaceholder": "— Select material —",
+      "destinoLabel": "Destination",
+      "sinDestinos": "Add at least one destination to continue.",
+      "motivoEdicion": "Reason for change",
+      "motivoEdicionPlaceholder": "Describe the reason for this modification...",
+      "guardarCambios": "Save changes",
+      "cancelar": "Cancel",
+      "editarPlanificacion": "Edit planning"
+    },
+    "modoLectura": {
+      "aviso": "There is already a submitted request for this week. Read-only view.",
+      "avisoConfirmaciones": "This change will invalidate confirmations already received from suppliers/carriers."
+    }
+  },
+  "misSolicitudes": {
+    "title": "My requests",
+    "subtitle": "List of all requests you have submitted and their current status.",
+    "nuevaSolicitud": "New request",
+    "sinSolicitudes": "You have not created any requests yet.",
+    "columns": {
+      "semana": "Week",
+      "fechas": "Dates",
+      "estado": "Status",
+      "totalViajes": "Total trips",
+      "creada": "Created",
+      "acciones": "Actions"
+    },
+    "detalle": {
+      "destino": "Destination",
+      "material": "Material",
+      "total": "Total",
+      "obs": "Notes"
+    },
+    "acciones": {
+      "continuarEditando": "Continue editing",
+      "editarPlanificacion": "Edit planning",
+      "cerrar": "Close",
+      "verDetalle": "View detail"
+    }
+  },
+  "solicitudesRecibidas": {
+    "title": "Received requests",
+    "subtitle": "Fuel requests submitted by Production pending management.",
+    "sinSolicitudes": "There are no requests submitted by Production at the moment.",
+    "columns": {
+      "semana": "Week",
+      "creadaPor": "Created by",
+      "fecha": "Date",
+      "estado": "Status",
+      "totalViajes": "Total trips",
+      "acciones": "Actions"
+    },
+    "detalle": {
+      "destino": "Destination",
+      "material": "Material",
+      "total": "Total",
+      "estado": "Status",
+      "sinProveedor": "No supplier assigned",
+      "historialCambios": "Change history",
+      "historial": {
+        "fecha": "Date",
+        "autor": "Author",
+        "motivo": "Reason",
+        "descripcion": "Change description"
+      }
+    },
+    "acciones": {
+      "verDetalle": "View detail",
+      "iniciarDistribucion": "Start distribution"
     }
   },
   "distribucion": {
@@ -234,6 +310,79 @@
         "importadoOk": "File imported. Cross-reference updated.",
         "importadoConAvisos": "File imported. {{n}} row(s) not recognised require manual review."
       }
+    }
+  },
+  "prosegur": {
+    "seguimiento": {
+      "alertaSinMapear": "{{n}} unmapped entry/entries — Review",
+      "revisar": "Review",
+      "importaciones": {
+        "title": "Imported files",
+        "columns": {
+          "fichero": "File",
+          "fecha": "Processed at",
+          "total": "Total rows",
+          "mapeadas": "Mapped",
+          "sinMapear": "Unmapped",
+          "estado": "Status"
+        },
+        "estados": {
+          "ok": "OK",
+          "error": "Error",
+          "partial": "Partial"
+        },
+        "sinImportaciones": "No files imported yet."
+      },
+      "sinMapear": {
+        "title": "Unmapped entries",
+        "columns": {
+          "material": "Material (Prosegur)",
+          "fecha": "Date",
+          "tractora": "Tractor",
+          "destino": "Destination",
+          "acciones": "Actions"
+        },
+        "mapear": "Map",
+        "sinEntradas": "No unmapped entries.",
+        "form": {
+          "material": "Material",
+          "proveedor": "Supplier",
+          "guardar": "Save mapping",
+          "cancelar": "Cancel"
+        },
+        "toast": {
+          "mapeado": "Entry mapped successfully"
+        }
+      }
+    },
+    "maestros": {
+      "tabLabel": "Prosegur Mapping",
+      "title": "Prosegur label mapping",
+      "subtitle": "Associate each label from the Excel file with a material and supplier in the system",
+      "crear": "New mapping",
+      "columns": {
+        "label": "Prosegur label",
+        "material": "Material",
+        "proveedor": "Supplier",
+        "acciones": "Actions"
+      },
+      "form": {
+        "title_create": "New mapping",
+        "label": "Prosegur label",
+        "labelPlaceholder": "E.g. CSR PRONATUR RUIZ MILA",
+        "material": "Material",
+        "proveedor": "Supplier",
+        "errors": {
+          "labelRequerido": "Label is required",
+          "materialRequerido": "Material is required",
+          "proveedorRequerido": "Supplier is required"
+        }
+      },
+      "toast": {
+        "guardado": "Mapping saved",
+        "eliminado": "Mapping deleted"
+      },
+      "sinMapeos": "No mappings defined yet."
     }
   },
   "maestros": {

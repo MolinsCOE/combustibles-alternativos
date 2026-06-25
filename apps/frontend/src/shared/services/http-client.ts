@@ -108,6 +108,18 @@ export const httpClient = {
       { method: "PUT", body: JSON.stringify(body) },
       options
     ),
+  patch: <T>(
+    path: string,
+    body: unknown,
+    schema: ZodSchema<T>,
+    options?: RequestOptions
+  ) =>
+    request(
+      path,
+      schema,
+      { method: "PATCH", body: JSON.stringify(body) },
+      options
+    ),
   delete: (path: string, options?: RequestOptions) =>
     requestVoid(path, { method: "DELETE" }, options)
 };

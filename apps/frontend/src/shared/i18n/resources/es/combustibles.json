@@ -4,7 +4,7 @@
     "dashboard": "Dashboard",
     "solicitud": "Solicitud",
     "distribucion": "Distribución",
-    "confirmacion": "Confirmación",
+    "confirmacion": "Confirmación proveedores y transportistas",
     "seguimiento": "Seguimiento",
     "maestros": "Maestros"
   },
@@ -104,8 +104,84 @@
       "enviado": "Solicitud enviada a Compras"
     },
     "confirm": {
-      "enviar": "¿Enviar la solicitud a Compras? Una vez enviada, no podrás editarla mientras Compras esté distribuyendo.",
+      "enviar": "¿Enviar la solicitud a Compras? Una vez enviada, podrás seguir editando las cantidades si es necesario.",
       "enviarTitle": "Confirmar envío"
+    },
+    "grupos": {
+      "añadirDestino": "+ Añadir destino",
+      "añadirMaterial": "+ Añadir material",
+      "eliminarDestino": "Eliminar destino",
+      "eliminarMaterial": "Eliminar material",
+      "destinoPlaceholder": "— Seleccionar destino —",
+      "materialPlaceholder": "— Seleccionar material —",
+      "destinoLabel": "Destino",
+      "sinDestinos": "Añade al menos un destino para continuar.",
+      "motivoEdicion": "Motivo del cambio",
+      "motivoEdicionPlaceholder": "Describe el motivo de esta modificación...",
+      "guardarCambios": "Guardar cambios",
+      "cancelar": "Cancelar",
+      "editarPlanificacion": "Editar planificación"
+    },
+    "modoLectura": {
+      "aviso": "Ya existe una solicitud enviada para esta semana. Vista en modo solo lectura.",
+      "avisoConfirmaciones": "Este cambio invalidará las confirmaciones ya recibidas de proveedores/transportistas."
+    }
+  },
+  "misSolicitudes": {
+    "title": "Mis solicitudes",
+    "subtitle": "Listado de todas las solicitudes que has enviado y su estado actual.",
+    "nuevaSolicitud": "Nueva solicitud",
+    "sinSolicitudes": "Todavía no has creado ninguna solicitud.",
+    "columns": {
+      "semana": "Semana",
+      "fechas": "Fechas",
+      "estado": "Estado",
+      "totalViajes": "Total viajes",
+      "creada": "Creada",
+      "acciones": "Acciones"
+    },
+    "detalle": {
+      "destino": "Destino",
+      "material": "Material",
+      "total": "Total",
+      "obs": "Obs."
+    },
+    "acciones": {
+      "continuarEditando": "Continuar editando",
+      "editarPlanificacion": "Editar planificación",
+      "cerrar": "Cerrar",
+      "verDetalle": "Ver detalle"
+    }
+  },
+  "solicitudesRecibidas": {
+    "title": "Solicitudes recibidas",
+    "subtitle": "Solicitudes de combustible enviadas por Producción pendientes de gestionar.",
+    "sinSolicitudes": "No hay solicitudes enviadas por Producción en este momento.",
+    "columns": {
+      "semana": "Semana",
+      "creadaPor": "Creada por",
+      "fecha": "Fecha",
+      "estado": "Estado",
+      "totalViajes": "Total viajes",
+      "acciones": "Acciones"
+    },
+    "detalle": {
+      "destino": "Destino",
+      "material": "Material",
+      "total": "Total",
+      "estado": "Estado",
+      "sinProveedor": "Sin proveedor asignado",
+      "historialCambios": "Historial de cambios",
+      "historial": {
+        "fecha": "Fecha",
+        "autor": "Autor",
+        "motivo": "Motivo",
+        "descripcion": "Descripción del cambio"
+      }
+    },
+    "acciones": {
+      "verDetalle": "Ver detalle",
+      "iniciarDistribucion": "Iniciar distribución"
     }
   },
   "distribucion": {
@@ -234,6 +310,79 @@
         "importadoOk": "Fichero importado. Cruce actualizado.",
         "importadoConAvisos": "Fichero importado. {{n}} fila(s) no reconocidas requieren revisión manual."
       }
+    }
+  },
+  "prosegur": {
+    "seguimiento": {
+      "alertaSinMapear": "{{n}} entrada(s) sin mapear — Revisar",
+      "revisar": "Revisar",
+      "importaciones": {
+        "title": "Ficheros importados",
+        "columns": {
+          "fichero": "Fichero",
+          "fecha": "Fecha proceso",
+          "total": "Total filas",
+          "mapeadas": "Mapeadas",
+          "sinMapear": "Sin mapear",
+          "estado": "Estado"
+        },
+        "estados": {
+          "ok": "OK",
+          "error": "Error",
+          "partial": "Parcial"
+        },
+        "sinImportaciones": "No hay ficheros importados aún."
+      },
+      "sinMapear": {
+        "title": "Entradas sin mapear",
+        "columns": {
+          "material": "Material (Prosegur)",
+          "fecha": "Fecha",
+          "tractora": "Tractora",
+          "destino": "Destino",
+          "acciones": "Acciones"
+        },
+        "mapear": "Mapear",
+        "sinEntradas": "No hay entradas sin mapear.",
+        "form": {
+          "material": "Material",
+          "proveedor": "Proveedor",
+          "guardar": "Guardar mapeo",
+          "cancelar": "Cancelar"
+        },
+        "toast": {
+          "mapeado": "Entrada mapeada correctamente"
+        }
+      }
+    },
+    "maestros": {
+      "tabLabel": "Mapeo Prosegur",
+      "title": "Mapeo de etiquetas Prosegur",
+      "subtitle": "Asocia cada etiqueta del fichero Excel con un material y proveedor del sistema",
+      "crear": "Nuevo mapeo",
+      "columns": {
+        "label": "Etiqueta Prosegur",
+        "material": "Material",
+        "proveedor": "Proveedor",
+        "acciones": "Acciones"
+      },
+      "form": {
+        "title_create": "Nuevo mapeo",
+        "label": "Etiqueta Prosegur",
+        "labelPlaceholder": "Ej. CSR PRONATUR RUIZ MILA",
+        "material": "Material",
+        "proveedor": "Proveedor",
+        "errors": {
+          "labelRequerido": "La etiqueta es obligatoria",
+          "materialRequerido": "El material es obligatorio",
+          "proveedorRequerido": "El proveedor es obligatorio"
+        }
+      },
+      "toast": {
+        "guardado": "Mapeo guardado",
+        "eliminado": "Mapeo eliminado"
+      },
+      "sinMapeos": "No hay mapeos definidos aún."
     }
   },
   "maestros": {

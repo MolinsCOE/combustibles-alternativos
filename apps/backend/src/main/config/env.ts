@@ -13,6 +13,8 @@ const envSchema = z.object({
   SMTP_USER: z.string().optional(),
   SMTP_PASS: z.string().optional(),
   SMTP_FROM: z.string().optional(),
+  PROSEGUR_WATCH_DIR: z.string().min(1).optional(),
+  PROSEGUR_CRON_SCHEDULE: z.string().min(1).default("0 4 * * *"),
 });
 
 export type Env = z.infer<typeof envSchema>;

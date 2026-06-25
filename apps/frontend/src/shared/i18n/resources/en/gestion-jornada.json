@@ -1,0 +1,182 @@
+{
+  "nav": {
+    "module": "Work Journal",
+    "today": "Today",
+    "projects": "Projects",
+    "tasks": "Tasks",
+    "notifications": "Notifications",
+    "weeklySnapshot": "Weekly Report"
+  },
+  "projects": {
+    "title": "Projects",
+    "new": "New project",
+    "empty": "No projects created yet.",
+    "emptyHint": "Create your first project to start logging tasks.",
+    "status": {
+      "open": "Open",
+      "closed": "Closed"
+    },
+    "fields": {
+      "name": "Name",
+      "namePlaceholder": "Project name",
+      "description": "Description",
+      "descriptionPlaceholder": "Project description (optional)",
+      "status": "Status",
+      "openedAt": "Created on",
+      "closedAt": "Closed on"
+    },
+    "actions": {
+      "close": "Close project",
+      "reopen": "Reopen project",
+      "closeConfirm": "Close project «{{name}}»? Associated tasks will be archived but kept permanently in history.",
+      "reopenConfirm": "Reopen project «{{name}}»?",
+      "edit": "Edit project",
+      "viewTasks": "View tasks"
+    },
+    "detail": {
+      "tasks": "Project tasks",
+      "noTasks": "This project has no tasks yet."
+    },
+    "form": {
+      "createTitle": "New project",
+      "editTitle": "Edit project",
+      "save": "Save project",
+      "errors": {
+        "nameRequired": "Name is required."
+      }
+    }
+  },
+  "tasks": {
+    "title": "Tasks",
+    "new": "New task",
+    "empty": "No tasks for this day.",
+    "emptyHint": "Add your first task of the day.",
+    "status": {
+      "pending": "Pending",
+      "in_progress": "In progress",
+      "completed": "Completed",
+      "blocked": "Blocked"
+    },
+    "priority": {
+      "high": "High",
+      "medium": "Normal",
+      "low": "Low"
+    },
+    "fields": {
+      "title": "Title",
+      "titlePlaceholder": "What did you do?",
+      "description": "Description",
+      "descriptionPlaceholder": "Detailed description (optional)",
+      "project": "Project",
+      "projectPlaceholder": "Select a project",
+      "date": "Date",
+      "timeSpent": "Time spent",
+      "timeSpentPlaceholder": "minutes",
+      "priority": "Priority",
+      "status": "Status",
+      "dueDate": "Due date",
+      "closedAt": "Closed on"
+    },
+    "form": {
+      "createTitle": "New task",
+      "editTitle": "Edit task",
+      "save": "Save task",
+      "errors": {
+        "titleRequired": "Title is required.",
+        "projectRequired": "You must select a project."
+      }
+    },
+    "actions": {
+      "complete": "Mark as completed",
+      "reopen": "Reopen task",
+      "block": "Mark as blocked",
+      "edit": "Edit",
+      "addSubtask": "Add subtask",
+      "addAttachment": "Attach file"
+    },
+    "timeDisplay": {
+      "hours": "{{h}}h {{m}}min",
+      "minutes": "{{m}}min"
+    }
+  },
+  "subtasks": {
+    "title": "Subtasks",
+    "new": "New subtask",
+    "empty": "No subtasks.",
+    "status": {
+      "pending": "Pending",
+      "completed": "Completed"
+    },
+    "fields": {
+      "title": "Title",
+      "titlePlaceholder": "Subtask title",
+      "priority": "Priority",
+      "dueDate": "Due date"
+    },
+    "form": {
+      "createTitle": "New subtask",
+      "save": "Add subtask",
+      "errors": {
+        "titleRequired": "Title is required."
+      }
+    },
+    "actions": {
+      "complete": "Complete",
+      "reopen": "Reopen"
+    }
+  },
+  "attachments": {
+    "title": "Attachments",
+    "add": "Attach file",
+    "empty": "No attachments.",
+    "fileType": {
+      "pdf": "PDF",
+      "image": "Image",
+      "excel": "Excel",
+      "email": "Email",
+      "other": "Other"
+    },
+    "actions": {
+      "view": "View",
+      "download": "Open",
+      "delete": "Delete",
+      "deleteConfirm": "Delete attachment «{{name}}»? The record will remain in history."
+    },
+    "externalHint": "This file type opens with the system application."
+  },
+  "notifications": {
+    "title": "Notifications",
+    "empty": "No notifications.",
+    "markRead": "Mark as read",
+    "markAllRead": "Mark all as read",
+    "dueDate": {
+      "task": "Task «{{title}}» is due tomorrow.",
+      "subtask": "Subtask «{{title}}» is due tomorrow."
+    }
+  },
+  "daily": {
+    "title": "Today — {{date}}",
+    "week": "This week",
+    "noTasksToday": "No tasks logged today.",
+    "totalTime": "Total time: {{time}}",
+    "navigate": {
+      "prev": "Previous month",
+      "next": "Next month",
+      "today": "Today"
+    }
+  },
+  "board": {
+    "title": "Task board",
+    "empty": "No tasks"
+  },
+  "gantt": {
+    "title": "Gantt view",
+    "taskColumn": "Task",
+    "today": "Today"
+  },
+  "views": {
+    "list": "List",
+    "board": "Board",
+    "gantt": "Gantt"
+  }
+}

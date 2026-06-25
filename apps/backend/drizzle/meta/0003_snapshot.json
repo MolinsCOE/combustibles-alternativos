@@ -1,0 +1,1485 @@
+{
+  "id": "8962a5ca-7b14-4305-bff6-e9c1fc168f6d",
+  "prevId": "9018c050-e2fd-4ffe-b57a-43a8dd6b5d0b",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.ca_asignaciones": {
+      "name": "ca_asignaciones",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "material_id": {
+          "name": "material_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "proveedor_id": {
+          "name": "proveedor_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "transportista_id": {
+          "name": "transportista_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pct": {
+          "name": "pct",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ca_asignaciones_material_id_ca_materiales_id_fk": {
+          "name": "ca_asignaciones_material_id_ca_materiales_id_fk",
+          "tableFrom": "ca_asignaciones",
+          "tableTo": "ca_materiales",
+          "columnsFrom": [
+            "material_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "ca_asignaciones_proveedor_id_ca_proveedores_id_fk": {
+          "name": "ca_asignaciones_proveedor_id_ca_proveedores_id_fk",
+          "tableFrom": "ca_asignaciones",
+          "tableTo": "ca_proveedores",
+          "columnsFrom": [
+            "proveedor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "ca_asignaciones_transportista_id_ca_proveedores_id_fk": {
+          "name": "ca_asignaciones_transportista_id_ca_proveedores_id_fk",
+          "tableFrom": "ca_asignaciones",
+          "tableTo": "ca_proveedores",
+          "columnsFrom": [
+            "transportista_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ca_confirmaciones": {
+      "name": "ca_confirmaciones",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "linea_distribucion_id": {
+          "name": "linea_distribucion_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "parte": {
+          "name": "parte",
+          "type": "ca_parte_confirmacion",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "estado": {
+          "name": "estado",
+          "type": "ca_estado_confirmacion",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "motivo": {
+          "name": "motivo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ts": {
+          "name": "ts",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ca_confirmaciones_linea_distribucion_id_ca_lineas_distribucion_id_fk": {
+          "name": "ca_confirmaciones_linea_distribucion_id_ca_lineas_distribucion_id_fk",
+          "tableFrom": "ca_confirmaciones",
+          "tableTo": "ca_lineas_distribucion",
+          "columnsFrom": [
+            "linea_distribucion_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ca_entradas_reales": {
+      "name": "ca_entradas_reales",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "solicitud_id": {
+          "name": "solicitud_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fecha": {
+          "name": "fecha",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "material_id": {
+          "name": "material_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "material_nom": {
+          "name": "material_nom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "proveedor_id": {
+          "name": "proveedor_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "proveedor_nom": {
+          "name": "proveedor_nom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "transportista_id": {
+          "name": "transportista_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "transportista_nom": {
+          "name": "transportista_nom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "viajes": {
+          "name": "viajes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "destino": {
+          "name": "destino",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "obs": {
+          "name": "obs",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ca_entradas_reales_solicitud_id_ca_solicitudes_id_fk": {
+          "name": "ca_entradas_reales_solicitud_id_ca_solicitudes_id_fk",
+          "tableFrom": "ca_entradas_reales",
+          "tableTo": "ca_solicitudes",
+          "columnsFrom": [
+            "solicitud_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ca_historial_solicitud": {
+      "name": "ca_historial_solicitud",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "solicitud_id": {
+          "name": "solicitud_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ts": {
+          "name": "ts",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "autor": {
+          "name": "autor",
+          "type": "ca_autor_historial",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "motivo": {
+          "name": "motivo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "descripcion": {
+          "name": "descripcion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ca_historial_solicitud_solicitud_id_ca_solicitudes_id_fk": {
+          "name": "ca_historial_solicitud_solicitud_id_ca_solicitudes_id_fk",
+          "tableFrom": "ca_historial_solicitud",
+          "tableTo": "ca_solicitudes",
+          "columnsFrom": [
+            "solicitud_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ca_lineas_distribucion": {
+      "name": "ca_lineas_distribucion",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "solicitud_id": {
+          "name": "solicitud_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "linea_solicitud_id": {
+          "name": "linea_solicitud_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "material_id": {
+          "name": "material_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "material_nom": {
+          "name": "material_nom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "proveedor_id": {
+          "name": "proveedor_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "proveedor_nom": {
+          "name": "proveedor_nom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "transportista_id": {
+          "name": "transportista_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "transportista_nom": {
+          "name": "transportista_nom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "destino": {
+          "name": "destino",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "dl": {
+          "name": "dl",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "dt": {
+          "name": "dt",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "dc": {
+          "name": "dc",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "dj": {
+          "name": "dj",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "dv": {
+          "name": "dv",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "ds": {
+          "name": "ds",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "dg": {
+          "name": "dg",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "estado": {
+          "name": "estado",
+          "type": "ca_estado_linea_distribucion",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'pendiente'"
+        },
+        "confirmacion_proveedor": {
+          "name": "confirmacion_proveedor",
+          "type": "ca_estado_confirmacion",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'pendiente'"
+        },
+        "confirmacion_transportista": {
+          "name": "confirmacion_transportista",
+          "type": "ca_estado_confirmacion",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'pendiente'"
+        },
+        "cantidades_proveedor": {
+          "name": "cantidades_proveedor",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "comentario_proveedor": {
+          "name": "comentario_proveedor",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cantidades_transportista": {
+          "name": "cantidades_transportista",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "comentario_transportista": {
+          "name": "comentario_transportista",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "motivo_rechazo_proveedor": {
+          "name": "motivo_rechazo_proveedor",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "motivo_rechazo_transportista": {
+          "name": "motivo_rechazo_transportista",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "correo_enviado_en": {
+          "name": "correo_enviado_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "correo_transportista_enviado_en": {
+          "name": "correo_transportista_enviado_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ca_lineas_distribucion_solicitud_id_ca_solicitudes_id_fk": {
+          "name": "ca_lineas_distribucion_solicitud_id_ca_solicitudes_id_fk",
+          "tableFrom": "ca_lineas_distribucion",
+          "tableTo": "ca_solicitudes",
+          "columnsFrom": [
+            "solicitud_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "ca_lineas_distribucion_linea_solicitud_id_ca_lineas_solicitud_id_fk": {
+          "name": "ca_lineas_distribucion_linea_solicitud_id_ca_lineas_solicitud_id_fk",
+          "tableFrom": "ca_lineas_distribucion",
+          "tableTo": "ca_lineas_solicitud",
+          "columnsFrom": [
+            "linea_solicitud_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ca_lineas_solicitud": {
+      "name": "ca_lineas_solicitud",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "solicitud_id": {
+          "name": "solicitud_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "material_id": {
+          "name": "material_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "material_nom": {
+          "name": "material_nom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dl": {
+          "name": "dl",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "dt": {
+          "name": "dt",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "dc": {
+          "name": "dc",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "dj": {
+          "name": "dj",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "dv": {
+          "name": "dv",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "ds": {
+          "name": "ds",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "dg": {
+          "name": "dg",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "destino": {
+          "name": "destino",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "obs": {
+          "name": "obs",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ca_lineas_solicitud_solicitud_id_ca_solicitudes_id_fk": {
+          "name": "ca_lineas_solicitud_solicitud_id_ca_solicitudes_id_fk",
+          "tableFrom": "ca_lineas_solicitud",
+          "tableTo": "ca_solicitudes",
+          "columnsFrom": [
+            "solicitud_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "ca_lineas_solicitud_material_id_ca_materiales_id_fk": {
+          "name": "ca_lineas_solicitud_material_id_ca_materiales_id_fk",
+          "tableFrom": "ca_lineas_solicitud",
+          "tableTo": "ca_materiales",
+          "columnsFrom": [
+            "material_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ca_materiales": {
+      "name": "ca_materiales",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nom": {
+          "name": "nom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "activo": {
+          "name": "activo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ca_plantilla_distribucion": {
+      "name": "ca_plantilla_distribucion",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "material_id": {
+          "name": "material_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "material_nom": {
+          "name": "material_nom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "proveedor_id": {
+          "name": "proveedor_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "proveedor_nom": {
+          "name": "proveedor_nom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "destino": {
+          "name": "destino",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "activo": {
+          "name": "activo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ca_plantilla_distribucion_material_id_ca_materiales_id_fk": {
+          "name": "ca_plantilla_distribucion_material_id_ca_materiales_id_fk",
+          "tableFrom": "ca_plantilla_distribucion",
+          "tableTo": "ca_materiales",
+          "columnsFrom": [
+            "material_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "ca_plantilla_distribucion_proveedor_id_ca_proveedores_id_fk": {
+          "name": "ca_plantilla_distribucion_proveedor_id_ca_proveedores_id_fk",
+          "tableFrom": "ca_plantilla_distribucion",
+          "tableTo": "ca_proveedores",
+          "columnsFrom": [
+            "proveedor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ca_prosegur_entries": {
+      "name": "ca_prosegur_entries",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "import_id": {
+          "name": "import_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fecha": {
+          "name": "fecha",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "hora_entrada": {
+          "name": "hora_entrada",
+          "type": "time",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hora_salida": {
+          "name": "hora_salida",
+          "type": "time",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dni": {
+          "name": "dni",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nombre": {
+          "name": "nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tarjeta": {
+          "name": "tarjeta",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tractora": {
+          "name": "tractora",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "remolque": {
+          "name": "remolque",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "material_raw": {
+          "name": "material_raw",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "destino_raw": {
+          "name": "destino_raw",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "full_seguiment_no": {
+          "name": "full_seguiment_no",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mapped_material_id": {
+          "name": "mapped_material_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mapped_proveedor_id": {
+          "name": "mapped_proveedor_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "ca_prosegur_entry_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'unmapped'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ca_prosegur_entries_import_id_ca_prosegur_imports_id_fk": {
+          "name": "ca_prosegur_entries_import_id_ca_prosegur_imports_id_fk",
+          "tableFrom": "ca_prosegur_entries",
+          "tableTo": "ca_prosegur_imports",
+          "columnsFrom": [
+            "import_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "ca_prosegur_entries_mapped_material_id_ca_materiales_id_fk": {
+          "name": "ca_prosegur_entries_mapped_material_id_ca_materiales_id_fk",
+          "tableFrom": "ca_prosegur_entries",
+          "tableTo": "ca_materiales",
+          "columnsFrom": [
+            "mapped_material_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "ca_prosegur_entries_mapped_proveedor_id_ca_proveedores_id_fk": {
+          "name": "ca_prosegur_entries_mapped_proveedor_id_ca_proveedores_id_fk",
+          "tableFrom": "ca_prosegur_entries",
+          "tableTo": "ca_proveedores",
+          "columnsFrom": [
+            "mapped_proveedor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ca_prosegur_imports": {
+      "name": "ca_prosegur_imports",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "filename": {
+          "name": "filename",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "processed_at": {
+          "name": "processed_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "status": {
+          "name": "status",
+          "type": "ca_prosegur_import_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rows_total": {
+          "name": "rows_total",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rows_mapped": {
+          "name": "rows_mapped",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rows_unmapped": {
+          "name": "rows_unmapped",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "error_message": {
+          "name": "error_message",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ca_prosegur_material_map": {
+      "name": "ca_prosegur_material_map",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "prosegur_label": {
+          "name": "prosegur_label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "material_id": {
+          "name": "material_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "proveedor_id": {
+          "name": "proveedor_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ca_prosegur_material_map_material_id_ca_materiales_id_fk": {
+          "name": "ca_prosegur_material_map_material_id_ca_materiales_id_fk",
+          "tableFrom": "ca_prosegur_material_map",
+          "tableTo": "ca_materiales",
+          "columnsFrom": [
+            "material_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "ca_prosegur_material_map_proveedor_id_ca_proveedores_id_fk": {
+          "name": "ca_prosegur_material_map_proveedor_id_ca_proveedores_id_fk",
+          "tableFrom": "ca_prosegur_material_map",
+          "tableTo": "ca_proveedores",
+          "columnsFrom": [
+            "proveedor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "ca_prosegur_material_map_prosegur_label_unique": {
+          "name": "ca_prosegur_material_map_prosegur_label_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "prosegur_label"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ca_proveedores": {
+      "name": "ca_proveedores",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nom": {
+          "name": "nom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tipus": {
+          "name": "tipus",
+          "type": "ca_tipus_proveedor",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "emails": {
+          "name": "emails",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'[]'::jsonb"
+        },
+        "bcc": {
+          "name": "bcc",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'[]'::jsonb"
+        },
+        "activo": {
+          "name": "activo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ca_solicitudes": {
+      "name": "ca_solicitudes",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "semana": {
+          "name": "semana",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ini": {
+          "name": "ini",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fi": {
+          "name": "fi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "creada_por": {
+          "name": "creada_por",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "estado": {
+          "name": "estado",
+          "type": "ca_estado_solicitud",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'borrador'"
+        },
+        "comentario_general": {
+          "name": "comentario_general",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "ts": {
+          "name": "ts",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "actualizado_en": {
+          "name": "actualizado_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.roles": {
+      "name": "roles",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "nombre": {
+          "name": "nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "descripcion": {
+          "name": "descripcion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fecha_creacion": {
+          "name": "fecha_creacion",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "fecha_actualizacion": {
+          "name": "fecha_actualizacion",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "roles_nombre_unique": {
+          "name": "roles_nombre_unique",
+          "columns": [
+            {
+              "expression": "nombre",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.usuarios": {
+      "name": "usuarios",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "nombre": {
+          "name": "nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "activo": {
+          "name": "activo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "rol_id": {
+          "name": "rol_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fecha_creacion": {
+          "name": "fecha_creacion",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "fecha_actualizacion": {
+          "name": "fecha_actualizacion",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "usuarios_email_unique": {
+          "name": "usuarios_email_unique",
+          "columns": [
+            {
+              "expression": "email",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "usuarios_rol_id_roles_id_fk": {
+          "name": "usuarios_rol_id_roles_id_fk",
+          "tableFrom": "usuarios",
+          "tableTo": "roles",
+          "columnsFrom": [
+            "rol_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.ca_autor_historial": {
+      "name": "ca_autor_historial",
+      "schema": "public",
+      "values": [
+        "produccion",
+        "compras"
+      ]
+    },
+    "public.ca_estado_confirmacion": {
+      "name": "ca_estado_confirmacion",
+      "schema": "public",
+      "values": [
+        "pendiente",
+        "confirmada",
+        "rechazada"
+      ]
+    },
+    "public.ca_estado_linea_distribucion": {
+      "name": "ca_estado_linea_distribucion",
+      "schema": "public",
+      "values": [
+        "pendiente",
+        "enviada",
+        "confirmada",
+        "rechazada"
+      ]
+    },
+    "public.ca_estado_solicitud": {
+      "name": "ca_estado_solicitud",
+      "schema": "public",
+      "values": [
+        "borrador",
+        "enviada",
+        "en_distribucion",
+        "confirmada",
+        "cerrada"
+      ]
+    },
+    "public.ca_parte_confirmacion": {
+      "name": "ca_parte_confirmacion",
+      "schema": "public",
+      "values": [
+        "proveedor",
+        "transportista"
+      ]
+    },
+    "public.ca_prosegur_entry_status": {
+      "name": "ca_prosegur_entry_status",
+      "schema": "public",
+      "values": [
+        "mapped",
+        "unmapped"
+      ]
+    },
+    "public.ca_prosegur_import_status": {
+      "name": "ca_prosegur_import_status",
+      "schema": "public",
+      "values": [
+        "ok",
+        "error",
+        "partial"
+      ]
+    },
+    "public.ca_tipus_proveedor": {
+      "name": "ca_tipus_proveedor",
+      "schema": "public",
+      "values": [
+        "proveedor",
+        "transportista",
+        "ambos"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

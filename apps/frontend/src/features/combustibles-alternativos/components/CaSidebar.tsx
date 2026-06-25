@@ -64,7 +64,7 @@ function navItemsForRol(rol: CaRol): NavItem[] {
         {
           to: "/combustibles/confirmaciones",
           icon: <CheckSquare size={18} aria-hidden="true" />,
-          label: "Confirmación de proveedores"
+          label: "Confirmación proveedores y transportistas"
         },
         {
           to: "/combustibles/entradas-reales",

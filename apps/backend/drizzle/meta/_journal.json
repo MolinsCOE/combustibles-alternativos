@@ -8,6 +8,62 @@
       "when": 1776363544071,
       "tag": "0000_chubby_slayback",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1781015658392,
+      "tag": "0001_thick_stranger",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1781174305455,
+      "tag": "0002_damp_kabuki",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1781509760541,
+      "tag": "0003_illegal_spyke",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1781600000000,
+      "tag": "0004_drop_plantilla_proveedor",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1781700000000,
+      "tag": "0005_add_destinos",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1750200000000,
+      "tag": "0006_add_mantenimientos",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1750300000000,
+      "tag": "0007_add_horario_llegadas",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1750400000000,
+      "tag": "0008_add_horario_plantilla",
+      "breakpoints": true
     }
   ]
 }

@@ -250,6 +250,12 @@ h3 {
   border-bottom: 1px solid var(--c-neutral-150);
 }
 
+.table--dense th,
+.table--dense td {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.82rem;
+}
+
 .table tbody tr:last-child td {
   border-bottom: none;
 }
@@ -380,16 +386,44 @@ h3 {
 }
 
 /* Toast */
+.toast-stack {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
 .toast {
-  padding: 0.6rem 0.9rem;
-  border-radius: var(--radius-sm);
+  padding: 0.75rem 1.1rem;
+  border-radius: var(--radius-md);
   font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  max-width: 360px;
+  animation: toast-in 0.2s ease;
+  pointer-events: auto;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .toast--success {
   background: var(--c-success-100);
   color: #00542a;
   border: 1px solid var(--c-success-500);
+}
+
+.toast--error {
+  background: var(--c-error-100);
+  color: #7a1a18;
+  border: 1px solid var(--c-error-500);
 }
 
 /* Health status legacy */
@@ -1773,6 +1807,12 @@ h3 {
 }
 
 /* Pills adicionales para el módulo */
+.pill--primary {
+  background: #dbeafe;
+  color: #1e40af;
+  border-color: #93c5fd;
+}
+
 .pill--warning {
   background: var(--c-warning-100);
   color: #5a3100;
@@ -2073,6 +2113,20 @@ h3 {
   content: "▾ ";
 }
 
+/* Grid de días en confirmación parcial */
+.combustibles-dias-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 479.98px) {
+  .combustibles-dias-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 /* Responsive */
 @media (max-width: 1023.98px) {
   .combustibles-kpis {
@@ -2103,3 +2157,176 @@ h3 {
   }
 }
 
+
+/* ─── Solicitud: grupos de destino ─────────────────────────────────────────── */
+
+.solicitud-grupo {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--c-neutral-150);
+  background: var(--c-neutral-0);
+}
+
+.solicitud-grupo__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  background: var(--c-primary-500);
+  border-left: 4px solid var(--c-primary-300);
+}
+
+.solicitud-grupo__header-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-primary-300);
+  white-space: nowrap;
+}
+
+.solicitud-grupo__header-value {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--c-neutral-0);
+}
+
+.solicitud-grupo__header select {
+  flex: 1;
+  max-width: 280px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: var(--c-neutral-0);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.solicitud-grupo__header select option {
+  background: var(--c-neutral-900);
+  color: var(--c-neutral-0);
+}
+
+.solicitud-grupo__header select:focus {
+  outline: 2px solid var(--c-primary-300);
+  outline-offset: 1px;
+}
+
+.solicitud-grupo__body {
+  padding: 0;
+}
+
+/* Tabla dentro del grupo */
+.solicitud-tabla thead tr {
+  background: var(--c-neutral-100);
+  border-bottom: 2px solid var(--c-neutral-150);
+}
+
+.solicitud-tabla thead th {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-neutral-600);
+  padding: 0.55rem 0.5rem;
+}
+
+.solicitud-tabla tbody tr {
+  border-bottom: 1px solid var(--c-neutral-100);
+  transition: background 0.1s;
+}
+
+.solicitud-tabla tbody tr:last-child {
+  border-bottom: none;
+}
+
+.solicitud-tabla tbody tr:hover {
+  background: var(--c-primary-100);
+}
+
+.solicitud-tabla .combustibles-num-input {
+  border-color: transparent;
+  background: var(--c-neutral-100);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.solicitud-tabla .combustibles-num-input:hover {
+  border-color: var(--c-neutral-200);
+  background: var(--c-neutral-0);
+}
+
+.solicitud-tabla .combustibles-num-input:focus {
+  border-color: var(--c-primary-400);
+  background: var(--c-neutral-0);
+  outline: 2px solid var(--c-primary-300);
+  outline-offset: 1px;
+}
+
+/* ─── Móvil: layout de tarjeta por fila ────────────────────────────────────── */
+@media (max-width: 640px) {
+  .solicitud-tabla,
+  .solicitud-tabla thead,
+  .solicitud-tabla tbody,
+  .solicitud-tabla th,
+  .solicitud-tabla td,
+  .solicitud-tabla tr {
+    display: block;
+  }
+
+  .solicitud-tabla thead {
+    display: none;
+  }
+
+  .solicitud-tabla tbody tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem 0.75rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--c-neutral-150);
+  }
+
+  /* Material ocupa toda la fila */
+  .solicitud-tabla tbody tr td:first-child {
+    grid-column: 1 / -1;
+  }
+
+  /* Días: cada celda muestra su etiqueta */
+  .solicitud-tabla tbody tr td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--c-neutral-400);
+    margin-bottom: 0.2rem;
+  }
+
+  /* Total y nota en una fila */
+  .solicitud-tabla tbody tr td.col-total,
+  .solicitud-tabla tbody tr td.col-nota {
+    grid-column: span 1;
+  }
+
+  /* Botón eliminar al final */
+  .solicitud-tabla tbody tr td.col-actions {
+    grid-column: 1 / -1;
+    text-align: right;
+  }
+
+  .solicitud-tabla .combustibles-num-input {
+    width: 100%;
+  }
+
+  .solicitud-grupo__header {
+    flex-wrap: wrap;
+  }
+
+  .solicitud-grupo__header select {
+    max-width: 100%;
+    width: 100%;
+  }
+}

@@ -5,6 +5,7 @@ import { initReactI18next } from "react-i18next";
 import aboutEn from "./resources/en/about.json";
 import combustiblesEn from "./resources/en/combustibles.json";
 import commonEn from "./resources/en/common.json";
+import gestionJornadaEn from "./resources/en/gestion-jornada.json";
 import healthEn from "./resources/en/health.json";
 import homeEn from "./resources/en/home.json";
 import rolesEn from "./resources/en/roles.json";
@@ -12,6 +13,7 @@ import usersEn from "./resources/en/users.json";
 import aboutEs from "./resources/es/about.json";
 import combustiblesEs from "./resources/es/combustibles.json";
 import commonEs from "./resources/es/common.json";
+import gestionJornadaEs from "./resources/es/gestion-jornada.json";
 import healthEs from "./resources/es/health.json";
 import homeEs from "./resources/es/home.json";
 import rolesEs from "./resources/es/roles.json";
@@ -34,7 +36,8 @@ void i18n
         health: healthEs,
         home: homeEs,
         about: aboutEs,
-        combustibles: combustiblesEs
+        combustibles: combustiblesEs,
+        "gestion-jornada": gestionJornadaEs
       },
       en: {
         common: commonEn,
@@ -43,12 +46,13 @@ void i18n
         health: healthEn,
         home: homeEn,
         about: aboutEn,
-        combustibles: combustiblesEn
+        combustibles: combustiblesEn,
+        "gestion-jornada": gestionJornadaEn
       }
     },
     fallbackLng: "es",
     supportedLngs: [...supportedLanguages],
-    ns: ["common", "users", "roles", "health", "home", "about", "combustibles"],
+    ns: ["common", "users", "roles", "health", "home", "about", "combustibles", "gestion-jornada"],
     defaultNS: defaultNamespace,
     nonExplicitSupportedLngs: true,
     load: "languageOnly",
