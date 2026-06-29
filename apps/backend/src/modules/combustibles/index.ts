@@ -47,6 +47,7 @@ import {
   DeleteHorarioPlantillaSlotUseCase,
   UpsertHorarioPlantillaSlotUseCase,
 } from "./application/use-cases/horario-plantilla.use-cases.js";
+import { GetComparativaUseCase } from "./application/use-cases/comparativa.use-case.js";
 import {
   DeleteMapUseCase,
   GetDailySummaryUseCase,
@@ -194,6 +195,13 @@ export function buildCombustiblesModule(db: Db, env: Env): CombustiblesModule {
   const upsertHorarioPlantillaSlot = new UpsertHorarioPlantillaSlotUseCase(horarioPlantillaRepo);
   const deleteHorarioPlantillaSlot = new DeleteHorarioPlantillaSlotUseCase(horarioPlantillaRepo);
 
+  // ── Prosegur repositories (antes del controller para poder inyectar en getComparativa)
+  const prosegurImportsRepo = new PostgresProsegurImportsRepository(db);
+  const prosegurEntriesRepo = new PostgresProsegurEntriesRepository(db);
+  const prosegurMapsRepo = new PostgresProsegurMaterialMapRepository(db);
+
+  const getComparativa = new GetComparativaUseCase(solicitudesRepo, distribucionRepo, prosegurEntriesRepo);
+
   // ── Controller ────────────────────────────────────────────────────────────
   const controller = new CombustiblesController({
     getEstadoCompleto,
@@ -230,12 +238,8 @@ export function buildCombustiblesModule(db: Db, env: Env): CombustiblesModule {
     deleteHorarioSlot,
     upsertHorarioPlantillaSlot,
     deleteHorarioPlantillaSlot,
+    getComparativa,
   });
-
-  // ── Prosegur repositories ─────────────────────────────────────────────────
-  const prosegurImportsRepo = new PostgresProsegurImportsRepository(db);
-  const prosegurEntriesRepo = new PostgresProsegurEntriesRepository(db);
-  const prosegurMapsRepo = new PostgresProsegurMaterialMapRepository(db);
 
   // ── Prosegur use cases ────────────────────────────────────────────────────
   const importProsegurFiles = new ImportProsegurFilesUseCase(
@@ -268,6 +272,7 @@ export function buildCombustiblesModule(db: Db, env: Env): CombustiblesModule {
     upsertMap,
     deleteMap,
     runImport,
+    importFiles: importProsegurFiles,
     getDailySummary,
     getWeeklySummary,
     watchDir,

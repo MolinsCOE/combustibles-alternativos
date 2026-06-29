@@ -226,5 +226,12 @@ export function buildCombustiblesRouter(
     controller.deleteHorarioPlantillaSlot
   );
 
+  // ── Comparativa planificado vs Prosegur ──────────────────────────────────
+  r.get(
+    "/api/combustibles/solicitudes/:id/comparativa",
+    validate("params", idParamSchema),
+    controller.getComparativa
+  );
+
   return r;
 }

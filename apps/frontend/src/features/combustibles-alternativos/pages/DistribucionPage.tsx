@@ -10,6 +10,7 @@ import {
   type DiaKey,
 } from "../store/caStore.js";
 import { HorarioLlegadasGrid } from "../components/HorarioLlegadasGrid.js";
+import { ComparativaTable } from "../components/ComparativaTable.js";
 
 // ---------------------------------------------------------------------------
 // Constantes
@@ -1664,6 +1665,21 @@ export function DistribucionPage() {
               });
             }}
           />
+        </section>
+      )}
+
+      {/* Comparativa planificado vs Prosegur */}
+      {solicitudActiva && (
+        <section className="page" style={{ marginTop: "1.5rem" }}>
+          <header className="page__header" style={{ marginBottom: "1rem" }}>
+            <div>
+              <h3 style={{ margin: 0 }}>Comparativa Planificado vs. Prosegur</h3>
+              <p className="page__subtitle" style={{ marginTop: "0.25rem" }}>
+                Viajes registrados en Prosegur frente a lo planificado para la semana {solicitudActiva.semana}
+              </p>
+            </div>
+          </header>
+          <ComparativaTable solicitudId={solicitudActiva.id} />
         </section>
       )}
 

@@ -4,7 +4,12 @@
  * All handlers are typed as RequestHandler to satisfy Express 5 strict overloads.
  */
 
+import * as fs from "node:fs";
+import * as os from "node:os";
+import * as path from "node:path";
 import type { RequestHandler } from "express";
+import { z } from "zod";
+import { parseFile } from "../infrastructure/prosegur/prosegur-excel.parser.js";
 import type {
   DeleteMapUseCase,
   GetDailySummaryUseCase,
@@ -13,11 +18,17 @@ import type {
   GetProsegurImportsUseCase,
   GetUnmappedEntriesUseCase,
   GetWeeklySummaryUseCase,
+  ImportProsegurFilesUseCase,
   MapEntryUseCase,
   RunProsegurImportUseCase,
   UpsertMapUseCase,
 } from "../application/use-cases/prosegur.use-cases.js";
 import type { DailySummaryQuery, MapEntryBody, ProsegurIdParam, UpsertMapBody, WeeklySummaryQuery } from "./prosegur.schemas.js";
+
+const uploadBodySchema = z.object({
+  filename: z.string().min(1),
+  content: z.string().min(1), // base64
+});
 
 export type ProsegurControllerDeps = {
   getProsegurImports: GetProsegurImportsUseCase;
@@ -28,6 +39,7 @@ export type ProsegurControllerDeps = {
   upsertMap: UpsertMapUseCase;
   deleteMap: DeleteMapUseCase;
   runImport: RunProsegurImportUseCase;
+  importFiles: ImportProsegurFilesUseCase;
   getDailySummary: GetDailySummaryUseCase;
   getWeeklySummary: GetWeeklySummaryUseCase;
   watchDir: string;
@@ -126,6 +138,24 @@ export class ProsegurController {
       res.json({ results });
     } catch (err) {
       next(err);
+    }
+  };
+
+  // Recibe { filename, content: base64 }, parsea y guarda en BD
+  readonly uploadFile: RequestHandler = async (req, res, next) => {
+    let tmpPath: string | null = null;
+    try {
+      const { filename, content } = uploadBodySchema.parse(req.body);
+      const buf = Buffer.from(content, "base64");
+      tmpPath = path.join(os.tmpdir(), `prosegur_${Date.now()}_${filename}`);
+      fs.writeFileSync(tmpPath, buf);
+      const rows = parseFile(tmpPath);
+      const results = await this.deps.importFiles.execute([{ filename, rows }]);
+      res.status(200).json(results[0] ?? { filename, total: 0, mapped: 0, unmapped: 0 });
+    } catch (err) {
+      next(err);
+    } finally {
+      if (tmpPath && fs.existsSync(tmpPath)) fs.unlinkSync(tmpPath);
     }
   };
 

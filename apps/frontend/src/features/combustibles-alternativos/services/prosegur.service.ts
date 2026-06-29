@@ -105,6 +105,13 @@ export const prosegurService = {
       z.object({ results: z.array(z.object({ filename: z.string(), total: z.number(), mapped: z.number(), unmapped: z.number() })) })
     ),
 
+  uploadFile: (filename: string, content: string) =>
+    httpClient.post(
+      `${BASE}/upload`,
+      { filename, content },
+      z.object({ filename: z.string(), total: z.number(), mapped: z.number(), unmapped: z.number() })
+    ),
+
   getDailySummary: (date: string) =>
     httpClient.get(`${BASE}/daily-summary?date=${date}`, z.array(dailySummaryItemSchema)),
 

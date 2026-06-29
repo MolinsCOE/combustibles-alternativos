@@ -1,263 +1,176 @@
-import React, { useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { X, Upload, AlertTriangle, CheckCircle } from "lucide-react";
-import {
-  parsearCSVProsegur,
-  type FilaProsegurParseada,
-  type ResultadoParseo
-} from "../utils/parseProsegur.js";
-import type {
-  Material,
-  Proveedor,
-  Transportista,
-  Asignacion
-} from "../data/mock.js";
+import { useRef, useState } from "react";
+import { X, Upload, CheckCircle, AlertTriangle } from "lucide-react";
+import { prosegurService } from "../services/prosegur.service.js";
+
+type ImportResult = {
+  filename: string;
+  total: number;
+  mapped: number;
+  unmapped: number;
+};
 
 type Props = {
   onClose: () => void;
-  onConfirmar: (filas: FilaProsegurParseada[]) => void;
-  materiales: Material[];
-  proveedores: Proveedor[];
-  transportistas: Transportista[];
-  asignaciones: Asignacion[];
+  onImportado?: () => void;
 };
 
-export function ImportarProsegurModal({
-  onClose,
-  onConfirmar,
-  materiales,
-  proveedores,
-  transportistas,
-  asignaciones
-}: Props) {
-  const { t } = useTranslation("combustibles");
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const [resultado, setResultado] = useState<ResultadoParseo | null>(null);
-  const [nombreFichero, setNombreFichero] = useState<string>("");
-  const [cargando, setCargando] = useState(false);
-
-  const maestros = { materiales, proveedores, transportistas, asignaciones };
-
-  const handleFicheroSeleccionado = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fichero = e.target.files?.[0];
-    if (!fichero) return;
-
-    setNombreFichero(fichero.name);
-    setCargando(true);
-
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onload = (ev) => {
-      const contenido = ev.target?.result;
-      if (typeof contenido !== "string") {
-        setResultado({
-          filas: [],
-          noMapeadas: 0,
-          omitidas: 0,
-          error: t("seguimiento.importar.errorLectura")
-        });
-        setCargando(false);
-        return;
-      }
-      const res = parsearCSVProsegur(contenido, maestros);
+    reader.onload = () => {
+      const result = reader.result as string;
+      // result = "data:application/...:base64,<datos>"
+      const base64 = result.split(",")[1] ?? "";
+      resolve(base64);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+export function ImportarProsegurModal({ onClose, onImportado }: Props) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [estado, setEstado] = useState<"idle" | "cargando" | "ok" | "error">("idle");
+  const [resultado, setResultado] = useState<ImportResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [nombreFichero, setNombreFichero] = useState("");
+
+  const handleFichero = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setNombreFichero(file.name);
+    setEstado("cargando");
+    setResultado(null);
+    setError(null);
+
+    try {
+      const base64 = await fileToBase64(file);
+      const res = await prosegurService.uploadFile(file.name, base64);
       setResultado(res);
-      setCargando(false);
-    };
-    reader.onerror = () => {
-      setResultado({
-        filas: [],
-        noMapeadas: 0,
-        omitidas: 0,
-        error: t("seguimiento.importar.errorLectura")
-      });
-      setCargando(false);
-    };
-    reader.readAsText(fichero, "UTF-8");
+      setEstado("ok");
+      onImportado?.();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error al importar");
+      setEstado("error");
+    }
   };
-
-  const handleConfirmar = () => {
-    if (!resultado || resultado.filas.length === 0) return;
-    onConfirmar(resultado.filas);
-  };
-
-  const hayFilas = resultado !== null && resultado.filas.length > 0;
 
   return (
-    <div className="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-importar-title">
-      <div className="modal modal--wide">
+    <div
+      style={{
+        position: "fixed", inset: 0, zIndex: 60,
+        background: "rgba(0,0,0,0.35)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        padding: "1rem",
+      }}
+      onClick={onClose}
+    >
+      <div
+        style={{
+          background: "white", borderRadius: "12px",
+          padding: "1.5rem", width: "440px", maxWidth: "100%",
+          boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Cabecera */}
-        <div className="modal__header">
-          <h2 id="modal-importar-title" className="modal__title">
-            {t("seguimiento.importar.title")}
-          </h2>
-          <button
-            type="button"
-            className="btn btn--ghost btn--icon"
-            onClick={onClose}
-            aria-label={t("seguimiento.importar.cerrar")}
-          >
-            <X size={18} aria-hidden="true" />
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem" }}>
+          <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: 700 }}>Importar fichero Prosegur</h3>
+          <button type="button" onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", padding: "2px" }}>
+            <X size={18} />
           </button>
         </div>
 
-        {/* Cuerpo */}
-        <div className="modal__body">
-          {/* Aviso formato */}
-          <div className="alert alert--info" style={{ marginBottom: "1.25rem" }}>
-            <AlertTriangle size={16} aria-hidden="true" />
-            <span>{t("seguimiento.importar.avisoFormato")}</span>
-          </div>
+        {/* Descripción */}
+        <p style={{ fontSize: "0.85rem", color: "var(--c-neutral-500)", marginBottom: "1.25rem" }}>
+          Selecciona el fichero <strong>.xls</strong> diario de Prosegur. El sistema lo importará y aplicará el mapeo de materiales automáticamente.
+        </p>
 
-          {/* Selector de fichero */}
-          <div className="form__field">
-            <label htmlFor="prosegur-file-input">
-              {t("seguimiento.importar.ficheroLabel")}
-            </label>
-            <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
-              <button
-                type="button"
-                className="btn btn--secondary"
-                onClick={() => inputRef.current?.click()}
-                disabled={cargando}
-              >
-                <Upload size={16} aria-hidden="true" style={{ marginRight: "0.4rem" }} />
-                {t("seguimiento.importar.seleccionarFichero")}
-              </button>
-              {nombreFichero && (
-                <span style={{ fontSize: "0.875rem", color: "var(--c-neutral-600)" }}>
-                  {nombreFichero}
-                </span>
+        {/* Selector */}
+        <div style={{ marginBottom: "1rem" }}>
+          <button
+            type="button"
+            disabled={estado === "cargando"}
+            onClick={() => inputRef.current?.click()}
+            style={{
+              display: "inline-flex", alignItems: "center", gap: "0.5rem",
+              padding: "0.5rem 1rem", fontSize: "0.875rem", fontWeight: 600,
+              border: "1.5px dashed var(--c-neutral-300)", borderRadius: "8px",
+              background: "var(--c-neutral-50)", cursor: estado === "cargando" ? "not-allowed" : "pointer",
+              color: "var(--c-primary-600, #003e39)",
+            }}
+          >
+            <Upload size={16} />
+            {estado === "cargando" ? "Importando…" : "Seleccionar fichero .xls"}
+          </button>
+          {nombreFichero && (
+            <span style={{ marginLeft: "0.75rem", fontSize: "0.82rem", color: "var(--c-neutral-500)" }}>
+              {nombreFichero}
+            </span>
+          )}
+          <input
+            ref={inputRef}
+            type="file"
+            accept=".xls,.xlsx"
+            style={{ display: "none" }}
+            onChange={handleFichero}
+          />
+        </div>
+
+        {/* Resultado OK */}
+        {estado === "ok" && resultado && (
+          <div style={{
+            display: "flex", flexDirection: "column", gap: "0.5rem",
+            padding: "1rem", borderRadius: "8px",
+            background: "var(--c-success-50, #f0fdf4)",
+            border: "1px solid var(--c-success-200, #bbf7d0)",
+          }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontWeight: 600, color: "var(--c-success-700, #15803d)", fontSize: "0.9rem" }}>
+              <CheckCircle size={16} />
+              Importación completada
+            </div>
+            <div style={{ fontSize: "0.82rem", color: "var(--c-neutral-600)", display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <span><strong>{resultado.total}</strong> viajes</span>
+              <span style={{ color: "var(--c-success-700, #15803d)" }}><strong>{resultado.mapped}</strong> mapeados</span>
+              {resultado.unmapped > 0 && (
+                <span style={{ color: "var(--c-warning-700, #b45309)" }}><strong>{resultado.unmapped}</strong> sin mapeo</span>
               )}
             </div>
-            <input
-              ref={inputRef}
-              id="prosegur-file-input"
-              type="file"
-              accept=".csv,.txt,.xls,.xlsx"
-              style={{ display: "none" }}
-              onChange={handleFicheroSeleccionado}
-            />
+            {resultado.unmapped > 0 && (
+              <p style={{ fontSize: "0.78rem", color: "var(--c-neutral-500)", margin: 0 }}>
+                Los viajes sin mapeo aparecen en la pestaña "No mapeados" para revisión manual.
+              </p>
+            )}
           </div>
+        )}
 
-          {/* Estado de carga */}
-          {cargando && (
-            <p style={{ color: "var(--c-neutral-500)", fontSize: "0.9rem" }}>
-              {t("seguimiento.importar.cargando")}
-            </p>
-          )}
+        {/* Error */}
+        {estado === "error" && error && (
+          <div style={{
+            display: "flex", alignItems: "flex-start", gap: "0.5rem",
+            padding: "1rem", borderRadius: "8px",
+            background: "var(--c-error-50, #fef2f2)",
+            border: "1px solid var(--c-error-200, #fecaca)",
+            color: "var(--c-error-700, #b91c1c)", fontSize: "0.85rem",
+          }}>
+            <AlertTriangle size={16} style={{ flexShrink: 0, marginTop: "1px" }} />
+            <span>{error}</span>
+          </div>
+        )}
 
-          {/* Error de parseo */}
-          {resultado?.error && (
-            <div className="alert alert--danger">
-              <AlertTriangle size={16} aria-hidden="true" />
-              <span>{resultado.error}</span>
-            </div>
-          )}
-
-          {/* Resumen del parseo */}
-          {hayFilas && !resultado?.error && (
-            <>
-              <div
-                style={{
-                  display: "flex",
-                  gap: "1rem",
-                  marginBottom: "1rem",
-                  flexWrap: "wrap"
-                }}
-              >
-                <span className="pill pill--success">
-                  <CheckCircle size={13} aria-hidden="true" style={{ marginRight: "0.3rem" }} />
-                  {t("seguimiento.importar.filasMapeadas", {
-                    n: resultado.filas.length - resultado.noMapeadas
-                  })}
-                </span>
-                {resultado.noMapeadas > 0 && (
-                  <span className="pill pill--warning">
-                    <AlertTriangle size={13} aria-hidden="true" style={{ marginRight: "0.3rem" }} />
-                    {t("seguimiento.importar.filasNoMapeadas", { n: resultado.noMapeadas })}
-                  </span>
-                )}
-                {resultado.omitidas > 0 && (
-                  <span className="pill pill--neutral">
-                    {t("seguimiento.importar.filasOmitidas", { n: resultado.omitidas })}
-                  </span>
-                )}
-              </div>
-
-              {/* Tabla de preview */}
-              <div className="table-wrapper" style={{ maxHeight: "340px", overflowY: "auto" }}>
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">{t("seguimiento.importar.col.fecha")}</th>
-                      <th scope="col">{t("seguimiento.importar.col.materialDetectado")}</th>
-                      <th scope="col">{t("seguimiento.importar.col.proveedor")}</th>
-                      <th scope="col">{t("seguimiento.importar.col.transportista")}</th>
-                      <th scope="col">{t("seguimiento.importar.col.horaEntrada")}</th>
-                      <th scope="col">{t("seguimiento.importar.col.horaSalida")}</th>
-                      <th scope="col">{t("seguimiento.importar.col.destino")}</th>
-                      <th scope="col">{t("seguimiento.importar.col.estado")}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {resultado.filas.map((fila, i) => (
-                      <tr
-                        key={i}
-                        className={fila.noMapeado ? "combustibles-row--aviso" : ""}
-                      >
-                        <td>{fila.fecha}</td>
-                        <td>
-                          {fila.noMapeado ? (
-                            <span title={t("seguimiento.importar.textoOriginal")}>
-                              <code style={{ fontSize: "0.8rem", background: "var(--c-warning-50, #fef9c3)", padding: "0.1rem 0.3rem", borderRadius: "3px" }}>
-                                {fila.materialTextoOriginal}
-                              </code>
-                            </span>
-                          ) : (
-                            fila.materialNombre
-                          )}
-                        </td>
-                        <td>{fila.proveedorNombre ?? <em style={{ color: "var(--c-warning-600, #ca8a04)" }}>{t("seguimiento.importar.noReconocido")}</em>}</td>
-                        <td>{fila.transportistaNombre ?? <em style={{ color: "var(--c-warning-600, #ca8a04)" }}>{t("seguimiento.importar.noReconocido")}</em>}</td>
-                        <td>{fila.horaEntrada}</td>
-                        <td>{fila.horaSalida}</td>
-                        <td>{fila.destino}</td>
-                        <td>
-                          {fila.noMapeado ? (
-                            <span className="pill pill--warning">{t("seguimiento.importar.revisar")}</span>
-                          ) : (
-                            <span className="pill pill--success">{t("seguimiento.importar.ok")}</span>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </>
-          )}
-
-          {/* Sin resultados */}
-          {resultado !== null && !resultado.error && resultado.filas.length === 0 && (
-            <div className="alert alert--warning">
-              <AlertTriangle size={16} aria-hidden="true" />
-              <span>{t("seguimiento.importar.sinFilas")}</span>
-            </div>
-          )}
-        </div>
-
-        {/* Pie del modal */}
-        <div className="modal__footer">
-          <button type="button" className="btn btn--ghost" onClick={onClose}>
-            {t("seguimiento.importar.cancelar")}
-          </button>
+        {/* Pie */}
+        <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "1.25rem" }}>
           <button
             type="button"
-            className="btn btn--primary"
-            disabled={!hayFilas || cargando}
-            onClick={handleConfirmar}
+            onClick={onClose}
+            style={{
+              padding: "0.45rem 1rem", fontSize: "0.875rem", fontWeight: 600,
+              border: "1px solid var(--c-neutral-300)", borderRadius: "6px",
+              background: "white", cursor: "pointer",
+            }}
           >
-            {t("seguimiento.importar.confirmar")}
+            {estado === "ok" ? "Cerrar" : "Cancelar"}
           </button>
         </div>
       </div>

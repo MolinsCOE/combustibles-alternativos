@@ -15,7 +15,7 @@
  * 10 = OBSERVACIONES (destino)
  */
 
-import * as XLSX from "xlsx";
+import XLSX from "xlsx";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import type { ParsedProsegurRow } from "../../domain/entities/combustibles.js";

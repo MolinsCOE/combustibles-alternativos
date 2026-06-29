@@ -45,6 +45,7 @@ import type {
   DeleteHorarioPlantillaSlotUseCase,
   UpsertHorarioPlantillaSlotUseCase,
 } from "../application/use-cases/horario-plantilla.use-cases.js";
+import type { GetComparativaUseCase } from "../application/use-cases/comparativa.use-case.js";
 import type {
   AddDestinoBody,
   ConfirmarLineaBody,
@@ -105,6 +106,7 @@ export type CombustiblesControllerDeps = {
   deleteHorarioSlot: DeleteHorarioSlotUseCase;
   upsertHorarioPlantillaSlot: UpsertHorarioPlantillaSlotUseCase;
   deleteHorarioPlantillaSlot: DeleteHorarioPlantillaSlotUseCase;
+  getComparativa: GetComparativaUseCase;
 };
 
 export class CombustiblesController {
@@ -577,6 +579,18 @@ export class CombustiblesController {
       await this.deps.deleteHorarioPlantillaSlot.execute(slotId);
       sseManager.notifyAll();
       res.status(204).send();
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  // ── Comparativa planificado vs Prosegur ──────────────────────────────────
+
+  readonly getComparativa: RequestHandler = async (req, res, next) => {
+    try {
+      const { id } = req.params as unknown as IdParam;
+      const result = await this.deps.getComparativa.execute(id);
+      res.status(200).json(result);
     } catch (err) {
       next(err);
     }

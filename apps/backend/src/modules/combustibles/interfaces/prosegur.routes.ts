@@ -53,6 +53,9 @@ export function buildProsegurRouter(controller: ProsegurController): Router {
   // POST /api/combustibles/prosegur/run  (manual trigger for testing)
   r.post("/api/combustibles/prosegur/run", controller.runImport);
 
+  // POST /api/combustibles/prosegur/upload  (subida directa de fichero XLS en base64)
+  r.post("/api/combustibles/prosegur/upload", controller.uploadFile);
+
   // GET  /api/combustibles/prosegur/daily-summary?date=yyyy-mm-dd
   r.get(
     "/api/combustibles/prosegur/daily-summary",

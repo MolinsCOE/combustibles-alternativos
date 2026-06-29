@@ -1,5 +1,7 @@
 import express, { type Router } from "express";
 import cors from "cors";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import type { Env } from "./config/env.js";
 import { getSwaggerUiHtml, openApiDocument } from "./config/openapi.js";
 import { errorHandler } from "../shared/interfaces/http/middleware/error-handler.js";
@@ -28,7 +30,7 @@ export function buildApp({ env, routers }: BuildAppOptions) {
       allowedHeaders: ["Content-Type", "Authorization"],
     })
   );
-  app.use(express.json({ limit: "100kb" }));
+  app.use(express.json({ limit: "10mb" }));
 
   if (env.ENABLE_SWAGGER) {
     app.get("/openapi.json", (_req, res) => {
@@ -41,6 +43,17 @@ export function buildApp({ env, routers }: BuildAppOptions) {
 
   for (const router of routers) {
     app.use(router);
+  }
+
+  // In production the backend also serves the compiled frontend (SPA).
+  // The frontend dist is copied next to the backend dist by the root Dockerfile.
+  if (env.NODE_ENV === "production") {
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    const frontendDist = path.resolve(__dirname, "../../frontend-dist");
+    app.use(express.static(frontendDist));
+    app.get("*", (_req, res) => {
+      res.sendFile(path.join(frontendDist, "index.html"));
+    });
   }
 
   app.use(errorHandler);

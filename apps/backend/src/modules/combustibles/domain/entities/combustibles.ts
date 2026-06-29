@@ -272,6 +272,28 @@ export type HorarioLlegada = {
 };
 
 // ---------------------------------------------------------------------------
+// Comparativa planificado vs real (Prosegur)
+// ---------------------------------------------------------------------------
+
+export type ComparativaDia = {
+  fecha: string;
+  diaKey: DiaKey;
+  planificado: number;
+  real: number;
+  desviacion: number;
+};
+
+export type ComparativaLinea = {
+  materialId: number;
+  materialNom: string;
+  proveedorId: number;
+  proveedorNom: string;
+  dias: ComparativaDia[];
+  totalPlanificado: number;
+  totalReal: number;
+};
+
+// ---------------------------------------------------------------------------
 // Estado completo (equivale a CaState del frontend)
 // ---------------------------------------------------------------------------
 

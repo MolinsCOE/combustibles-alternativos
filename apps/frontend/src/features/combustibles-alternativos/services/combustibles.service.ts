@@ -418,6 +418,27 @@ export const combustiblesService = {
   deleteHorarioSlot: (solicitudId: number, slotId: number) =>
     httpClient.delete(`${BASE}/horario/${solicitudId}/${slotId}`),
 
+  // Comparativa planificado vs Prosegur
+  getComparativa: (solicitudId: number) =>
+    httpClient.get(
+      `${BASE}/solicitudes/${solicitudId}/comparativa`,
+      z.array(z.object({
+        materialId: z.number(),
+        materialNom: z.string(),
+        proveedorId: z.number(),
+        proveedorNom: z.string(),
+        dias: z.array(z.object({
+          fecha: z.string(),
+          diaKey: z.enum(["dl","dt","dc","dj","dv","ds","dg"]),
+          planificado: z.number(),
+          real: z.number(),
+          desviacion: z.number(),
+        })),
+        totalPlanificado: z.number(),
+        totalReal: z.number(),
+      }))
+    ),
+
   // Plantilla de horario
   upsertHorarioPlantillaSlot: (data: {
     dia: "dl" | "dt" | "dc" | "dj" | "dv" | "ds" | "dg";
